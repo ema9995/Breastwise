@@ -1,0 +1,215 @@
+# Modèles de données – BreastWise
+
+> Hypothèse : base de données relationnelle (ex : PostgreSQL).
+
+---
+
+## 1. Utilisatrices
+
+### 1.1 Table `users`
+
+**Rôle :** stocker les informations de base des utilisatrices (compte, connexion).
+
+**Champs :**
+- `id` (PK, entier / UUID) : identifiant unique de l'utilisatrice.
+- `email` (string, unique) : adresse e-mail de connexion.
+- `password_hash` (string) : mot de passe **haché** (jamais en clair).
+- `first_name` (string, optionnel) : prénom pour personnaliser les messages.
+- `created_at` (timestamp) : date de création du compte.
+- `updated_at` (timestamp) : date de dernière mise à jour du profil.
+- Champs possibles plus tard :
+  - `last_login_at` (timestamp) : dernière connexion.
+  - `onboarding_completed` (bool) : si le parcours d'accueil est terminé.
+
+---
+
+## 2. État du jour – `/etat-du-jour`
+
+### 2.1 Table `daily_states`
+
+**Rôle :** stocker, pour chaque jour, l'état énergie / fatigue / humeur de l'utilisatrice.
+
+**Champs :**
+- `id` (PK)
+- `user_id` (FK → `users.id`) : à qui appartient cet état du jour.
+- `date` (date) : le jour concerné (par ex. `2025-03-15`).
+- `energy_level` (int, 1–5) : niveau d'énergie.
+- `fatigue_level` (int, 1–5) : niveau de fatigue.
+- `mood_level` (int, 1–5) : humeur générale.
+- `note` (string / text, optionnel) : petit texte "Un mot sur ta journée ?".
+- `created_at` (timestamp)
+- `updated_at` (timestamp)
+
+**Contraintes :**
+- 1 ligne max par `(user_id, date)`.
+
+
+## 3. Traitement & rendez-vous – `/traitement`
+
+Tu peux soit **tout mettre dans une seule table**, soit séparer un "plan global" et les "séances/rendez-vous".
+
+
+### 3.1 Table `treatment_sessions`
+
+**Rôle :** stocker les **séances** et/ou rendez-vous importants liés au traitement.
+
+**Champs :**
+- `id` (PK)
+- `user_id` (FK → `users.id`)
+- `type` (string) : ex. `chimio`, `radio`, `consultation`, `examen`, `autre`.
+- `title` (string) : ex. "Séance de chimio #3", "IRM de contrôle".
+- `description` (text, optionnel)
+- `status` (string) : `scheduled`, `completed`, `cancelled`.
+- `start_datetime` (timestamp) : date/heure du rendez-vous.
+- `end_datetime` (timestamp, optionnel).
+- `location` (string, optionnel) : lieu / hôpital.
+- `doctor_name` (string, optionnel).
+- `notes` (text, optionnel) : ressenti après séance, infos importantes.
+- `created_at` (timestamp)
+- `updated_at` (timestamp)
+
+> Pour un MVP, cette table peut aussi servir pour **tous** les rendez-vous (pas besoin de `appointments` séparée).
+
+---
+
+## 4. Plan du jour – `/plan-du-jour`
+
+### 4.1 Table `day_plans`
+
+**Rôle :** représenter le plan d'une journée pour une utilisatrice.
+
+**Champs :**
+- `id` (PK)
+- `user_id` (FK → `users.id`)
+- `date` (date) : jour du plan.
+- `notes` (text, optionnel) : commentaire général sur le plan.
+- `created_at` (timestamp)
+- `updated_at` (timestamp)
+
+**Contraintes :**
+- 1 seul `day_plans` par `(user_id, date)` (en pratique).
+
+### 4.2 Table `day_tasks`
+
+**Rôle :** stocker les **tâches** du plan du jour.
+
+**Champs :**
+- `id` (PK)
+- `day_plan_id` (FK → `day_plans.id`)
+- `user_id` (FK → `users.id`) : sécurité / requêtes directes.
+- `title` (string) : ex. "Faire une sieste", "Préparer mon rendez-vous".
+- `description` (text, optionnel)
+- `category` (string) : ex. `medical`, `administratif`, `bien_etre`, `quotidien`, `repos`.
+- `priority` (string) : `low`, `medium`, `high`.
+- `status` (string) : `todo`, `in_progress`, `done`, `skipped`.
+- `scheduled_time` (time / timestamp, optionnel) : heure prévue.
+- `duration_minutes` (int, optionnel).
+- `created_at` (timestamp)
+- `updated_at` (timestamp)
+
+---
+
+## 5. Journal – `/journal`
+
+### 5.1 Table `journal_entries`
+
+**Rôle :** stocker les entrées du journal (texte libre ou guidé).
+
+**Champs :**
+- `id` (PK)
+- `user_id` (FK → `users.id`)
+- `created_at` (timestamp) : date/heure de création.
+- `updated_at` (timestamp)
+- `title` (string, optionnel)
+- `content` (text) : le texte du journal.
+- `context` (string, optionnel) :
+  - ex. `apres_rdv`, `jour_difficile`, `jour_joie`, `gratitude`, `liberation`, etc.
+- `mood_label` (string, optionnel) :
+  - ex. `triste`, `anxieuse`, `apaisee`, `en_colere`, etc.
+- `is_locked` (bool, défaut `false`) : entrée "sensible" verrouillée.
+- `deleted_at` (timestamp, optionnel) : pour suppression douce.
+
+---
+
+## 7. Documents & vulgarisation – `/documents`
+
+### 7.1 Table `documents`
+
+**Rôle :** stocker les documents médicaux (fichiers uplodés).
+
+**Champs :**
+- `id` (PK)
+- `user_id` (FK → `users.id`)
+- `title` (string) : ex. "Compte-rendu du 5 mars".
+- `type` (string) :
+  - ex. `compte_rendu`, `ordonnance`, `resultat_examen`, `courrier`, `autre`.
+- `original_file_url` ou `storage_key` (string) :
+  - chemin / clé vers le fichier (ex : S3, disque local).
+- `uploaded_at` (timestamp)
+- `created_at` (timestamp)
+- `updated_at` (timestamp)
+
+### 7.2 Table `document_summaries`
+
+**Rôle :** stocker les résumés / vulgarisations générés (par IA ou plus tard).
+
+**Champs :**
+- `id` (PK)
+- `document_id` (FK → `documents.id`)
+- `summary_text` (text) : résumé simplifié.
+- `explanations_text` (text, optionnel) : explication des termes complexes.
+- `generated_by_ai` (bool, défaut `false`)
+- `created_at` (timestamp)
+- `updated_at` (timestamp)
+
+### 7.3 Table `document_treatment_links`
+
+**Rôle :** lier un document médical à un rendez-vous/séance spécifique.
+
+**Champs :**
+- `id` (PK)
+- `document_id` (FK → `documents.id`)
+- `treatment_session_id` (FK → `treatment_sessions.id`)
+- `created_at` (timestamp)
+
+**Contraintes :**
+- Un document peut être lié à plusieurs rendez-vous (si besoin).
+- Un rendez-vous peut avoir plusieurs documents associés.
+
+---
+## 8. Résumé des relations principales
+
+- `users` 1—N `daily_states`
+- `users` 1—N `treatment_sessions`
+- `users` 1—N `day_plans` 1—N `day_tasks`
+- `users` 1—N `journal_entries` 1—N `journal_highlights` (optionnel)
+- `users` 1—N `documents` 1—N `document_summaries`
+- `documents` N—N `treatment_sessions` (via `document_treatment_links`)
+
+---
+
+## 9. Priorité de création (MVP)
+
+Pour un premier backend fonctionnel, ordre conseillé :
+
+1. **Auth & utilisatrices** :
+   - `users`
+
+2. **État du jour** :
+   - `daily_states`
+
+3. **Traitement** :
+   - `treatment_sessions`
+
+4. **Plan du jour** :
+   - `day_plans`
+   - `day_tasks`
+
+5. **Journal** :
+   - `journal_entries`
+   - `journal_highlights` (optionnel, peut être ajouté plus tard)
+
+6. **Documents** :
+   - `documents`
+   - `document_summaries`
+   - `document_treatment_links` (pour lier documents et rendez-vous)

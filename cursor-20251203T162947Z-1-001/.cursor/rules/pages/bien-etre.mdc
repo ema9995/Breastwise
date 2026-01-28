@@ -1,0 +1,355 @@
+# Page "Prendre soin de moi" – BreastWise
+
+## 1. Objectif de la page
+
+- Offrir une **bibliothèque d'exercices doux** pour gérer le stress, la fatigue, les émotions et la douleur.
+- Proposer des **outils pratiques et accessibles** (respiration, visualisation, activités créatives, mouvement doux).
+- Adapter les suggestions selon l'**état du moment** (énergie, fatigue, humeur).
+- Créer un **espace de pause et de ressourcement** facilement accessible.
+- Permettre de **suivre sa pratique** (exercices favoris, historique, progression douce).
+
+## 2. Route
+
+- URL : `/bien-etre`
+- Accès : depuis le tableau de bord (`/dashboard`) via la carte "Prendre soin de moi".
+
+## 3. Contenu principal
+
+### 3.1 Zone d'accueil & suggestion du moment
+
+**Message bienveillant** (en haut de page) :
+- Exemple : "Prendre soin de toi, c'est aussi prendre soin de ta force. 🌸"
+- Exemple : "Un petit moment pour toi, rien que pour toi."
+
+**Suggestion du moment** (basée sur l'état du jour si disponible) :
+- Si fatigue élevée : "Tu sembles fatiguée aujourd'hui. Un exercice de respiration douce ou une activité créative pourrait t'aider à te détendre."
+- Si stress/humeur difficile : "Une activité créative ou un exercice de visualisation pourrait t'apaiser en ce moment."
+- Si énergie correcte : "Tu as de l'énergie aujourd'hui. Peut-être explorer une activité créative ou un mouvement doux ?"
+- Si aucune donnée : "Choisis l'exercice qui te fait envie en ce moment."
+
+**Bouton "Exercice rapide"** (bien visible) :
+- Texte : "J'ai besoin d'une pause rapide (2-3 min)"
+- Action : ouvre directement un exercice de respiration courte
+- Design : icône de pause, couleur douce
+
+### 3.2 Section "Par besoin"
+
+**Navigation par catégorie** (cartes cliquables) :
+
+#### a) "Je me sens stressée / anxieuse"
+- Exercices de **respiration** (cohérence cardiaque, respiration 4-7-8)
+- Exercices de **grounding** (ancrage, 5 sens)
+- **Activités créatives** (coloriage, dessin libre)
+- **Méditation guidée** courte (5-10 min)
+
+#### b) "Je me sens fatiguée / épuisée"
+- **Respiration douce** pour récupérer
+- **Visualisation réparatrice** (lieu de repos imaginaire)
+- **Activités créatives douces** (coloriage, écouter de la musique)
+- **Mouvement doux** (étirements assis, mouvements très lents)
+
+#### c) "Je ressens de la douleur / inconfort"
+- **Respiration pour la douleur** (techniques de gestion)
+- **Distraction créative** (coloriage, dessin, collage)
+- **Relaxation progressive** (détente musculaire)
+- **Photographie contemplative** (se concentrer sur la beauté)
+
+#### d) "Je me sens triste / émotionnelle"
+- **Activités d'expression créative** (dessin, peinture intuitive, collage d'émotions)
+- **Écrire une lettre à soi-même** (bienveillante)
+- **Méditation de bienveillance** (envers soi-même)
+- **Ancrage émotionnel** (techniques pour se reconnecter)
+
+#### e) "Je veux juste me détendre"
+- **Respiration libre** (sans contrainte)
+- **Activités créatives** (coloriage, dessin libre, tricot)
+- **Méditation guidée** (différentes durées : 5, 10, 15 min)
+- **Visualisation de lieu sûr**
+
+#### f) "Je veux retrouver de l'énergie"
+- **Respiration énergisante** (douce, pas agressive)
+- **Mouvement doux** (étirements, mouvements fluides)
+- **Activités créatives stimulantes** (photographie, journal visuel)
+- **Exercices de réveil corporel** (très doux)
+
+### 3.3 Section "Bibliothèque d'exercices"
+
+**Liste complète des exercices disponibles** (avec filtres) :
+
+#### Exercices de respiration
+
+1. **"Respiration 4-7-8"** (5 minutes)
+   - Description : "Technique simple pour calmer le système nerveux."
+   - Instructions : Inspirer 4 temps, retenir 7, expirer 8.
+   - Audio guidé : Oui (optionnel)
+   - Icône : 🌬️
+
+2. **"Cohérence cardiaque"** (5 minutes)
+   - Description : "Harmoniser ton rythme cardiaque et apaiser ton esprit."
+   - Instructions : Respiration régulière à 6 cycles par minute.
+   - Audio guidé : Oui (avec indicateur visuel)
+   - Icône : 💙
+
+3. **"Respiration douce"** (3-5 minutes)
+   - Description : "Respiration libre, sans contrainte, juste observer."
+   - Instructions : Respirer naturellement, observer sans jugement.
+   - Audio guidé : Oui (voix douce)
+   - Icône : 🌸
+
+4. **"Respiration pour la douleur"** (5-10 minutes)
+   - Description : "Technique douce pour accompagner la douleur."
+   - Instructions : Respiration profonde, visualisation de détente.
+   - Audio guidé : Oui
+   - Icône : 🕯️
+
+#### Exercices de visualisation
+
+1. **"Mon lieu sûr"** (10 minutes)
+   - Description : "Visualiser un endroit où tu te sens en sécurité et apaisée."
+   - Instructions guidées : Créer mentalement un lieu, explorer les détails, s'y ressourcer.
+   - Audio guidé : Oui (voix douce, musique douce en fond optionnelle)
+   - Icône : 🏞️
+
+2. **"Visualisation réparatrice"** (15 minutes)
+   - Description : "Imaginer son corps se régénérer, se réparer, retrouver de la force."
+   - Instructions : Visualisation douce de guérison, lumière apaisante.
+   - Audio guidé : Oui
+   - Icône : 🌙
+
+#### Exercices de méditation
+
+1. **"Méditation de pleine conscience"** (5, 10, 15 minutes)
+   - Description : "Observer tes pensées et émotions sans jugement."
+   - Instructions : Attention à la respiration, aux sensations, aux pensées.
+   - Audio guidé : Oui (différentes durées)
+   - Icône : 🧘
+
+2. **"Méditation de bienveillance"** (10 minutes)
+   - Description : "Cultiver la bienveillance envers toi-même."
+   - Instructions : Phrases de bienveillance répétées, chaleureuses.
+   - Audio guidé : Oui
+   - Icône : 💝
+
+#### Exercices de relaxation
+
+1. **"Relaxation progressive"** (15-20 minutes)
+   - Description : "Détendre chaque partie de ton corps, une à une."
+   - Instructions : Contracter puis relâcher chaque groupe musculaire.
+   - Audio guidé : Oui
+   - Icône : 🌊
+
+#### Exercices de mouvement doux
+
+1. **"Étirements assis"** (5-10 minutes)
+   - Description : "Mouvements très doux, adaptés à la fatigue."
+   - Instructions : Étirements assis, mouvements lents, respectueux du corps.
+   - Vidéo guidée : Oui (ou instructions écrites + images)
+   - Icône : 🤲
+
+2. **"Mouvement fluide"** (10 minutes)
+   - Description : "Mouvements doux et fluides, comme une danse lente."
+   - Instructions : Mouvements libres, guidés par la respiration.
+   - Vidéo guidée : Oui
+   - Icône : 🌊
+
+3. **"Réveil corporel doux"** (5 minutes)
+   - Description : "Réveiller ton corps en douceur, sans forcer."
+   - Instructions : Micro-mouvements, étirements très légers.
+   - Vidéo guidée : Oui
+   - Icône : 🌅
+
+#### Exercices d'ancrage & grounding
+
+1. **"Technique des 5 sens"** (5 minutes)
+   - Description : "Se reconnecter au présent par les sens."
+   - Instructions : Identifier 5 choses vues, 4 touchées, 3 entendues, 2 senties, 1 goûtée.
+   - Audio guidé : Oui
+   - Icône : 🌍
+
+2. **"Ancrage émotionnel"** (5-10 minutes)
+   - Description : "Se reconnecter à soi, à ses émotions, avec bienveillance."
+   - Instructions : Observer ses émotions, les accueillir, s'ancrer.
+   - Audio guidé : Oui
+   - Icône : 🌳
+
+#### Activités créatives & artistiques
+
+1. **"Coloriage apaisant"** (10-30 minutes)
+   - Description : "Colorier des mandalas ou des motifs doux pour se concentrer et se détendre."
+   - Instructions : Télécharger ou imprimer un mandala, choisir des couleurs douces, colorier sans pression.
+   - Matériel : Mandalas à imprimer (fournis sur le site) ou cahier de coloriage.
+   - Ressources : Lien vers des mandalas à télécharger
+   - Icône : 🎨
+
+2. **"Dessin libre"** (10-20 minutes)
+   - Description : "Dessiner librement ce qui te passe par la tête, sans jugement."
+   - Instructions : Prendre un crayon et du papier, laisser ta main guider, pas besoin de savoir dessiner.
+   - Matériel : Papier, crayons, feutres (ce qu'on a sous la main).
+   - Icône : ✏️
+
+3. **"Peinture intuitive"** (15-30 minutes)
+   - Description : "Peindre avec les doigts ou un pinceau, laisser les couleurs exprimer tes émotions."
+   - Instructions : Choisir 2-3 couleurs qui te parlent, peindre librement sur une feuille.
+   - Matériel : Peinture (aquarelle, gouache), papier épais, pinceaux ou doigts.
+   - Icône : 🖌️
+
+4. **"Écrire une lettre à soi-même"** (10-15 minutes)
+   - Description : "Écrire une lettre bienveillante à la personne que tu es aujourd'hui."
+   - Instructions : Commencer par "Chère moi", écrire avec bienveillance, se remercier pour ce qu'on traverse.
+   - Matériel : Papier et stylo, ou dans le journal.
+   - Icône : 💌
+
+5. **"Créer un collage d'émotions"** (15-20 minutes)
+   - Description : "Découper des images, mots, couleurs qui résonnent avec ce que tu ressens."
+   - Instructions : Feuilles de magazines, photos, papiers colorés, créer un collage libre.
+   - Matériel : Magazines, ciseaux, colle, papier.
+   - Icône : ✂️
+
+6. **"Écouter de la musique et dessiner"** (10-15 minutes)
+   - Description : "Laisser la musique guider ton crayon sur le papier."
+   - Instructions : Mettre une musique douce, fermer les yeux, laisser la main dessiner au rythme.
+   - Matériel : Musique (playlist fournie ou choix personnel), papier, crayon.
+   - Ressources : Lien vers une playlist apaisante
+   - Icône : 🎵
+
+7. **"Écrire un poème ou un haïku"** (5-10 minutes)
+   - Description : "Exprimer une émotion ou un moment en quelques mots."
+   - Instructions : Pas besoin d'être poète, juste écrire ce qui vient, même court.
+   - Exemple de haïku : 3 lignes (5-7-5 syllabes).
+   - Matériel : Papier et stylo, ou dans le journal.
+   - Icône : 📝
+
+8. **"Photographie contemplative"** (10-20 minutes)
+   - Description : "Prendre des photos de ce qui t'apaise : une fleur, la lumière, un objet qui te fait du bien."
+   - Instructions : Sortir ou regarder autour de soi, capturer des moments de beauté simple.
+   - Matériel : Téléphone ou appareil photo.
+   - Icône : 📸
+
+9. **"Créer un journal visuel"** (15-30 minutes)
+   - Description : "Mélanger dessin, collage, écriture pour raconter ta journée ou un moment."
+   - Instructions : Une page, mélanger images, mots, couleurs, créer une page qui te ressemble.
+   - Matériel : Cahier, crayons, collages, photos.
+   - Icône : 📔
+
+10. **"Tricot ou crochet doux"** (20-30 minutes)
+    - Description : "Répéter des gestes doux et apaisants avec la laine."
+    - Instructions : Si tu sais tricoter/crocheter, faire quelques rangs. Si non, apprendre un point simple (tutoriel fourni).
+    - Matériel : Laine, aiguilles ou crochet.
+    - Ressources : Tutoriel vidéo pour débuter
+    - Icône : 🧶
+
+11. **"Écrire une liste de gratitude visuelle"** (5-10 minutes)
+    - Description : "Dessiner ou coller des images pour représenter 3 choses pour lesquelles tu es reconnaissante."
+    - Instructions : Au lieu d'écrire, utiliser des images, dessins, couleurs.
+    - Matériel : Papier, crayons, images à coller.
+    - Icône : 🌸
+
+12. **"Créer un autoportrait bienveillant"** (15-20 minutes)
+    - Description : "Dessiner ou peindre un autoportrait qui met en avant ta force, pas ton apparence."
+    - Instructions : Se représenter avec des symboles de force, couleurs qui te font du bien.
+    - Matériel : Papier, crayons, peinture.
+    - Icône : 🎭
+
+### 3.4 Section "Mes exercices favoris"
+
+**Liste personnalisée** des exercices que l'utilisatrice a marqués comme favoris :
+- Accès rapide aux exercices qu'elle préfère
+- Bouton "Ajouter aux favoris" sur chaque exercice
+- Possibilité de créer des **playlists personnalisées** (ex : "Ma routine du matin", "Pour les jours difficiles", "Mes activités créatives")
+
+### 3.5 Section "Ma pratique"
+
+**Suivi doux** (sans pression, juste observation) :
+
+- **Historique** : "Tu as fait X exercices cette semaine."
+- **Streak** (optionnel, bienveillant) : "Tu prends soin de toi régulièrement. C'est précieux."
+- **Temps total** : "Tu as consacré X minutes à ton bien-être ce mois-ci."
+- **Exercices les plus pratiqués** : "Tes exercices préférés sont..."
+
+**Message bienveillant** : "Il n'y a pas de bonne ou de mauvaise fréquence. L'important, c'est de prendre soin de toi quand tu en as besoin."
+
+### 3.6 Section "Suggestions contextuelles"
+
+**Liens vers d'autres sections** selon le besoin :
+
+- Si stress détecté : "Tu veux aussi explorer ton journal pour exprimer ce que tu ressens ?" → `/journal`
+- Si fatigue : "Peut-être adapter ton plan du jour pour prévoir plus de repos ?" → `/plan-du-jour`
+- Si douleur : "As-tu noté ta douleur dans ton suivi d'énergie ?" → `/etat-du-jour`
+
+## 4. Actions disponibles sur la page
+
+- **Choisir un exercice** par catégorie ou dans la bibliothèque complète.
+- **Filtrer** les exercices (par type, durée, besoin).
+- **Lancer un exercice** (audio/vidéo guidé pour respiration/visualisation/méditation).
+- **Accéder aux ressources** (mandalas à télécharger, playlists, tutoriels pour activités créatives).
+- **Marquer comme favori** un exercice.
+- **Créer une playlist** personnalisée.
+- **Voir l'historique** de pratique (optionnel, sans pression).
+- **Partager un exercice** (option future : avec un proche).
+- Retour au tableau de bord.
+
+## 5. Navigation
+
+- **Depuis** : `/dashboard` (carte "Prendre soin de moi").
+- **Vers** :
+  - `/dashboard` (retour)
+  - `/journal` (si suggestion d'exprimer ses émotions)
+  - `/plan-du-jour` (si suggestion d'adapter le planning)
+  - `/etat-du-jour` (si suggestion de noter un état)
+
+## 6. Ton & style spécifiques
+
+- **Toujours tutoyer** (cohérent avec le reste).
+- **Invitations douces** : "Tu peux essayer...", "Si tu veux...", "N'hésite pas à..."
+- **Pas de pression** : "Il n'y a pas de bonne ou de mauvaise façon de faire."
+- **Rassurer** : "Prends le temps dont tu as besoin. Tu peux arrêter à tout moment."
+- **Valider** : "Tous les exercices sont valides. Choisis celui qui te fait du bien."
+- **Adapter** : "Si un exercice ne te convient pas, tu peux en essayer un autre."
+- **Pour les activités créatives** : "Il n'y a pas besoin d'être artiste. L'important, c'est de créer pour toi."
+
+## 7. Design & ambiance
+
+- **Palette de couleurs apaisantes** : verts doux, bleus pâles, lavandes, roses très pâles.
+- **Typographie lisible** : police confortable, espacement généreux.
+- **Icônes douces** : émojis ou icônes arrondies pour chaque type d'exercice.
+- **Animations subtiles** : transitions douces, pas de distractions.
+- **Espace aéré** : beaucoup de blanc, pas de surcharge visuelle.
+- **Mode sombre** optionnel (pour le soir).
+- **Audio de qualité** : voix douce, bienveillante, rythme lent (pour exercices guidés).
+
+## 8. Messages contextuels
+
+- **Première visite** : "Bienvenue dans ton espace de bien-être. Ici, tu trouveras des exercices doux et des activités créatives pour prendre soin de toi. Choisis celui qui te fait envie."
+- **Aucun exercice fait** : "Cet espace t'attend. Tu peux commencer par un exercice court (2-3 minutes) ou une activité créative si tu veux."
+- **Beaucoup d'exercices récents** : "Tu prends bien soin de toi. C'est précieux."
+- **Pause dans la pratique** : "Tu n'as pas fait d'exercice depuis quelques jours. Pas de pression, cet espace est là quand tu en as besoin."
+
+## 9. Détails techniques des exercices
+
+### Format des exercices
+
+Chaque exercice affiche :
+- **Titre** clair
+- **Description** bienveillante
+- **Durée** estimée
+- **Difficulté** (très doux, doux, modéré) - toujours adapté
+- **Prérequis** (ex : "Peut être fait allongée", "Assise ou debout", "Matériel nécessaire : papier, crayons")
+- **Matériel nécessaire** (pour activités créatives)
+- **Ressources** (liens vers mandalas, playlists, tutoriels si applicable)
+- **Bouton "Commencer"** → ouvre l'exercice guidé ou les instructions
+
+### Pendant l'exercice
+
+**Pour exercices guidés (respiration, visualisation, méditation)** :
+- **Interface épurée** : pas de distractions
+- **Audio guidé** : voix douce, instructions claires
+- **Indicateurs visuels** (si respiration) : animation de respiration, compteur
+- **Bouton "Pause"** : mettre en pause à tout moment
+- **Bouton "Arrêter"** : quitter l'exercice sans jugement
+- **Message de fin** : "Bravo, tu as pris ce moment pour toi. 🌸"
+
+**Pour activités créatives** :
+- **Instructions claires** affichées
+- **Ressources téléchargeables** (mandalas, exemples)
+- **Espace pour partager** (optionnel, si l'utilisatrice veut sauvegarder une photo de sa création)
+- **Pas de pression** : "Tu peux créer à ton rythme, sans jugement."

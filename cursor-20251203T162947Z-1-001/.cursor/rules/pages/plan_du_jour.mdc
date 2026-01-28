@@ -1,0 +1,205 @@
+# Page "Plan de ma journée" – BreastWise
+
+## 1. Objectif de la page
+
+- Proposer à l'utilisatrice un **plan de journée réaliste et doux**, adapté à :
+  - son **état du jour** (énergie, fatigue, humeur),
+  - ses **rendez-vous médicaux** du jour,
+  - et, plus tard, ses **préférences**.
+- L'aider à **réduire la charge mentale** en hiérarchisant les tâches (ce qui est important vs ce qui peut attendre).
+- Mettre en avant l'idée : **"On adapte la journée à ton état, pas l'inverse."**
+- Permettre à l'utilisatrice de **personnaliser** ce plan (ajouter, modifier, supprimer des tâches).
+
+## 2. Route
+
+- URL : `/plan-du-jour`
+- Accès :
+  - depuis le tableau de bord (`/dashboard`) via la carte "Plan de ma journée",
+  - éventuellement depuis d'autres pages (journal, bien-être, traitement).
+
+## 3. Principe de fonctionnement (logique métier)
+
+### 3.1 Dépendances aux autres pages / données
+
+Le plan du jour dépend de :
+
+- **État du jour** (`/etat-du-jour`) :
+  - `energy_level` (1–5)
+  - `fatigue_level` (1–5)
+  - `mood_level` (1–5)
+- **Traitement / rendez-vous** (`/traitement`) :
+  - rendez-vous ou séances **prévu·es aujourd'hui**
+- **Tâches déjà existantes** (si un plan existe déjà pour aujourd'hui) :
+  - pour éviter de régénérer tout le plan à chaque visite
+
+Données en base (côté backend) :
+
+- `daily_states` : état du jour
+- `treatment_sessions` / `appointments` : rendez-vous du jour
+- `day_plans` : enregistrement du plan du jour
+- `day_tasks` : tâches proposées / modifiées pour la journée
+
+### 3.2 Logique simple (MVP, sans IA complexe)
+
+Au premier accès de la journée à `/plan-du-jour` :
+
+1. Le backend vérifie s'il existe déjà un **plan pour aujourd'hui** (`day_plans` pour `user_id` + `date`).
+   - S'il existe → on **affiche ce plan** (avec les tâches existantes).
+   - S'il n'existe pas → on **génère un nouveau plan**.
+
+2. Pour générer un plan :
+   - Lire l'**état du jour** dans `daily_states` (si absent, proposer d'abord de le remplir).
+   - Lire les **rendez-vous du jour** (`treatment_sessions` / `appointments` avec date = aujourd'hui).
+   - Appliquer des **règles simples** selon énergie / fatigue / rendez-vous.
+
+### 3.3 Exemples de règles (côté backend)
+
+#### Cas 1 : énergie faible (1–2) OU fatigue élevée (4–5)
+
+- Tâches proposées :
+  - 0–1 tâche "obligatoire" (ex : rendez-vous médical du jour)
+  - 1–2 actions de **bien-être / repos** :
+    - "Faire une sieste de 20–30 minutes"
+    - "Faire un exercice de respiration douce"
+    - "Regarder un film/série qui te fait du bien"
+  - 0 ou 1 petite tâche administrative / quotidienne (optionnelle)
+
+- Message sur la page :
+  - "Aujourd'hui, on va vraiment y aller en douceur. On privilégie le repos et quelques petites actions qui te font du bien."
+
+#### Cas 2 : énergie moyenne (3), fatigue moyenne (3)
+
+- Tâches proposées :
+  - 1–2 tâches "quotidiennes" (administratif léger, organisation)
+    - ex : "Scanner et ranger un document important", "Noter les questions pour ton prochain rendez-vous"
+  - 1 tâche de **bien-être**
+    - ex : "Faire un exercice de respiration" ou "Écrire quelques lignes dans ton journal"
+  - 1 tâche "moment pour toi"
+    - ex : "Appeler une personne qui te fait du bien", "Écouter de la musique que tu aimes"
+
+- Message :
+  - "On va équilibrer aujourd'hui entre petites choses utiles et moments pour toi."
+
+#### Cas 3 : énergie bonne (4–5), fatigue faible (1–2)
+
+- Tâches proposées :
+  - 2–3 tâches "utiles" (administratif, organisation, préparation)
+  - 1 tâche bien-être (toujours présente)
+  - Adapter si **rendez-vous important** :
+    - si chimio / grosse consultation → ne pas surcharger, même si énergie OK
+
+- Message :
+  - "Tu sembles avoir un peu plus d'énergie aujourd'hui. On en profite pour avancer sur ce qui compte pour toi, tout en gardant des moments doux."
+
+#### Cas 4 : rendez-vous médical aujourd'hui
+
+Dans tous les cas, s'il y a un rendez-vous aujourd'hui :
+
+- Ajouter automatiquement des tâches comme :
+  - "Préparer mon rendez-vous (questions, documents)" – avant l'heure du rendez-vous
+  - "Temps de récupération après le rendez-vous" – bloc de repos
+- Si gros rendez-vous (ex : chimio) :
+  - Limiter le nombre d'autres tâches proposées
+  - Mettre un message :
+    - "C'est déjà beaucoup d'avoir ce rendez-vous aujourd'hui. Le reste peut attendre."
+
+---
+
+## 4. Contenu principal de la page
+
+### 4.1 En-tête : Résumé du jour
+
+- Message d'accueil :
+  - Exemple : "On va construire ensemble un petit plan pour aujourd'hui."
+- Rappel de l'état du jour (si dispo) :
+  - "Énergie : 2/5, Fatigue : 4/5, Humeur : 3/5"
+  - Bouton : **"Mettre à jour mon état du jour"** → `/etat-du-jour`
+- Rappel des rendez-vous du jour (si existants) :
+  - Ex : "Aujourd'hui : Consultation avec Dr Martin à 15h."
+
+### 4.2 Bloc "Plan proposé pour aujourd'hui"
+
+Affichage des tâches générées automatiquement (si plan non encore modifié) :
+
+Pour chaque tâche (`day_tasks`) :
+- **Titre** (ex : "Faire une sieste", "Préparer le rendez-vous", "Faire un exercice de respiration")
+- **Catégorie** : `médical`, `administratif`, `bien-être`, `quotidien`, `repos`
+- **Priorité** : `priorité forte`, `normale`, `optionnelle` (affiché avec des badges)
+- **Heure suggérée** (optionnelle)
+- **Case à cocher** pour marquer comme faite
+
+Actions possibles sur chaque tâche :
+- Marquer comme **faite** / non faite
+- **Modifier** (titre, heure, catégorie)
+- **Supprimer** (avec confirmation douce)
+
+### 4.3 Bloc "Personnaliser ma journée"
+
+Section pour que l'utilisatrice sente qu'elle a la main :
+
+- **Bouton "Ajouter une tâche"** :
+  - Champs :
+    - Titre (champ obligatoire)
+    - Catégorie (liste : médical, administratif, bien-être, quotidien, repos)
+    - Heure (optionnelle)
+    - Commentaire (optionnel)
+  - Bouton "Ajouter à mon plan"
+
+- **Bouton "Alléger ma journée"** :
+  - Propose de transformer certaines tâches en "optionnelles" ou de les déplacer à **demain** (logique future).
+
+- **Bouton "Re-générer un plan"** (optionnel, plus tard) :
+  - Après nouvelle saisie d'état du jour, possibilité de proposer un nouveau plan
+  - A utiliser avec prudence pour ne pas effacer ce que l'utilisatrice a déjà modifié
+
+### 4.4 Bloc "Moments pour moi"
+
+Mise en avant d'au moins **une action bien-être**, même petite :
+
+- Exemples :
+  - "Prendre 10 minutes pour respirer en douceur" → lien vers `/bien-etre`
+  - "Écrire quelques lignes dans mon journal" → lien vers `/journal`
+- Message :
+  - "Ces petits moments comptent autant que le reste. Ils font partie de ton soin."
+
+---
+
+## 5. Actions disponibles sur la page
+
+- Voir le **plan proposé** pour aujourd'hui.
+- Marquer des tâches comme **faites** / non faites.
+- **Modifier** ou **supprimer** des tâches.
+- **Ajouter** ses propres tâches.
+- (Plus tard) reporter une tâche à un autre jour.
+- Mettre à jour son **état du jour** via lien vers `/etat-du-jour`.
+- Accéder rapidement à :
+  - `/traitement` (si une tâche est liée à un rendez-vous)
+  - `/bien-etre` (pour un exercice)
+  - `/journal` (pour une écriture liée au ressenti du jour)
+
+---
+
+## 6. Navigation
+
+- **Depuis** :
+  - `/dashboard` (carte "Plan de ma journée")
+  - `/etat-du-jour` (après avoir rempli l'état du jour)
+- **Vers** :
+  - `/dashboard` (retour)
+  - `/etat-du-jour` (si l'état du jour n'est pas à jour)
+  - `/traitement` (si des tâches sont liées à un rendez-vous)
+  - `/bien-etre` (si tâches bien-être)
+  - `/journal` (si invitation à écrire)
+
+---
+
+## 7. Ton & style spécifiques
+
+- Toujours tutoyer.
+- Pas de ton productiviste ("tu dois faire tout ça aujourd'hui"), mais plutôt :
+  - "Voici quelques idées pour t'aider à organiser ta journée."
+  - "Tu peux adapter ce plan comme tu veux."
+- Mettre en avant la **flexibilité** :
+  - "Si quelque chose te semble trop, tu peux le déplacer à un autre jour."
+- Valider le repos :
+  - "Le repos est une action à part entière, surtout pendant un traitement."

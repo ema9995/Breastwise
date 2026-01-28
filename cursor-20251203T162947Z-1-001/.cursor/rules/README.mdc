@@ -1,0 +1,43 @@
+# Projet BreastWise
+
+## Vision
+
+Créer un espace numérique qui rend le parcours du cancer du sein plus clair, plus humain et moins épuisant. 
+BreastWise aide chaque femme à suivre son énergie, comprendre ses traitements et se sentir soutenue à chaque étape.
+Plus qu'un simple suivi médical, BreastWise combine **organisation du quotidien**, **compréhension du parcours médical** et **soutien émotionnel bienveillant**.
+
+## Problématique
+
+Le parcours du cancer du sein est complexe, épuisant et souvent isolant. 
+Les femmes doivent jongler entre rendez-vous médicaux, traitements, effets secondaires, paperasse, tout en restant émotionnellement présentes pour leurs proches. 
+Les outils actuels se concentrent surtout sur le médical et oublient l'organisation et le soutien émotionnel.
+
+## Solution
+
+BreastWise propose une approche globale :
+
+1. **Suivi d'énergie & fatigue** : planification des tâches en fonction du niveau d'énergie, de fatigue et de l'état émotionnel.
+2. **Suivi du traitement** : suivi des rendez-vous, des séances, des traitements.
+3. **Soutien émotionnel** : messages bienveillants, journal guidé, exercices de gestion du stress.
+
+## Fonctionnalités clés
+
+- **Tableau de bord "Énergie, Émotion & Traitement"**  
+  Vue centrale qui affiche :  
+  - les niveaux d'énergie, de fatigue et d'humeur,  
+  - l'avancement du traitement (prochains rendez-vous, séances passées, étapes importantes).
+  - des suggestions d'exercices pour gérer le stress et la fatigue.
+
+
+- **Plan d'action quotidien avec IA**  
+  Proposition d'un **planning adapté chaque jour** (tâches à faire, à reporter, activités douces) selon l'état physique et émotionnel du moment.
+
+- **Journal guidé & soutien moral**  
+  Questions guidées, espace d'expression, exercices de respiration, d'écriture  pour évacuer les émotions.
+
+- **Espace bien-être**
+  Exercices de respiration, visualisation, activités créatives, mouvement doux.
+
+
+## Objectif du projet
+Réduire la surcharge mentale (en les aidant s'organiser), clarifier le parcours médical et offrir un soutien émotionnel constant aux femmes touchées par le cancer du sein.

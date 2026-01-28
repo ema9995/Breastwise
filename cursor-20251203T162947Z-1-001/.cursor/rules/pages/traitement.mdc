@@ -1,0 +1,201 @@
+# Page "Mon traitement" – BreastWise
+
+## 1. Objectif de la page
+
+- Donner une **vue d'ensemble claire** du parcours médical (rendez-vous passés, à venir, étapes importantes).
+- Visualiser le **parcours sous forme de timeline** (chronologique, facile à comprendre).
+- Aider à **anticiper** les prochaines étapes (préparation, questions à poser).
+- **Rassurer** en montrant l'avancement ("Tu as déjà fait X séances sur Y").
+- Permettre d'**ajouter et modifier** les rendez-vous et étapes.
+- Permettre d'**associer des documents médicaux** aux rendez-vous et séances.
+
+## 2. Route
+
+- URL : `/traitement`
+- Accès : depuis le tableau de bord (`/dashboard`) via la carte "Mon traitement".
+
+## 3. Contenu principal
+
+### 3.1 Section "Où en es-tu ?"
+
+Vue d'ensemble en haut de page :
+
+- **Message personnalisé** :
+  - Exemple : "Tu es à la 3ème séance de chimiothérapie sur 6 prévues."
+  - Exemple : "Prochaine étape : consultation avec l'oncologue le 15 mars."
+
+- **Indicateurs visuels simples** :
+  - Barre de progression (si traitement avec nombre de séances défini).
+  - Exemple : "Séances de chimiothérapie : 4/6 terminées"
+
+### 3.2 Section "Timeline du traitement"
+
+Affichage chronologique (du plus ancien au plus récent, ou inversement avec option de tri) :
+
+Chaque **événement** est une carte avec :
+
+- **Date** (format lisible : "15 mars 2024").
+- **Type d'événement** :
+  - Rendez-vous (consultation, séance de traitement, examen, etc.)
+  - Étape importante (début de traitement, fin d'une phase, etc.)
+- **Titre / Description** :
+  - Exemple : "Consultation avec Dr. Martin (Oncologue)"
+  - Exemple : "Séance de chimiothérapie #3"
+  - Exemple : "IRM de contrôle"
+- **Statut** :
+  - ✅ Passé (avec date)
+  - 📅 À venir (avec date)
+  - ⏳ En cours
+- **Lieu** (optionnel) : nom du centre, adresse.
+- **Notes personnelles** (optionnel) : ce que l'utilisatrice a noté après.
+- **Documents associés** (optionnel) : icône 📄 si des documents sont liés à ce rendez-vous, avec possibilité de cliquer pour voir les documents.
+
+**Design de la timeline** :
+- Ligne verticale avec des points/icônes pour chaque événement.
+- Couleurs différentes selon le statut (vert pour passé, bleu pour à venir, orange pour en cours).
+- Possibilité de cliquer sur un événement pour voir les détails.
+
+### 3.3 Section "Prochains rendez-vous"
+
+Bloc mis en avant pour les **3 prochains rendez-vous** :
+
+- Date et heure
+- Type de rendez-vous
+- Avec qui (nom du médecin si renseigné)
+- Bouton "Voir tous les rendez-vous" → scroll vers la timeline complète
+
+### 3.4 Section "Ajouter un rendez-vous / une étape"
+
+Formulaire (peut être dans un modal ou directement sur la page) :
+
+- **Type** :
+  - Consultation
+  - Séance de traitement (chimiothérapie, radiothérapie, etc.)
+  - Examen (IRM, scanner, échographie, etc.)
+  - Autre
+- **Date et heure**
+- **Avec qui** (nom du médecin / professionnel)
+- **Lieu** (nom du centre, adresse)
+- **Notes** (champ libre, optionnel)
+- **Rappel** (optionnel) : "Me rappeler X jours avant"
+
+Bouton : "Ajouter ce rendez-vous"
+
+### 3.5 Section "Étapes importantes"
+
+Bloc séparé pour les **jalons du parcours** (si applicable) :
+
+- Début du traitement
+- Fin d'une phase (ex : fin de la chimiothérapie)
+- Début de la radiothérapie
+- Consultation de suivi
+- etc.
+
+Chaque étape peut être :
+- ✅ Accomplie
+- 📅 À venir
+- ⏳ En cours
+
+### 3.6 Section "Mes documents médicaux"
+
+**Bloc dédié** pour gérer les documents liés au traitement :
+
+#### a) Upload de documents
+
+**Zone d'upload** (drag & drop ou bouton "Choisir un fichier") :
+
+- **Types de fichiers acceptés** :
+  - PDF (comptes-rendus, ordonnances, résultats d'examens)
+  - Images (JPG, PNG) : photos de documents, ordonnances, etc.
+  - Formats texte (optionnel) : DOC, DOCX
+
+- **Informations à renseigner lors de l'upload** :
+  - **Titre** (obligatoire) : ex. "Compte-rendu consultation du 15 mars"
+  - **Type de document** (liste déroulante) :
+    - Compte-rendu de consultation
+    - Ordonnance
+    - Résultat d'examen (IRM, scanner, prise de sang, etc.)
+    - Courrier médical
+    - Autre
+  - **Associer à un rendez-vous** (optionnel) :
+    - Liste déroulante avec les rendez-vous de la timeline
+    - Permet de lier le document à un événement spécifique
+  - **Date du document** (optionnel) : si différente de la date d'upload
+
+- **Bouton "Ajouter ce document"** → upload + enregistrement en base
+
+- **Message de confirmation** : "Document ajouté avec succès. Tu peux le retrouver dans la section Documents ou associé à ton rendez-vous."
+
+#### b) Liste des documents récents
+
+**Aperçu des 3-5 derniers documents uploadés** :
+
+- Titre du document
+- Type
+- Date d'upload
+- Rendez-vous associé (si applicable)
+- Bouton "Voir tous mes documents" → redirige vers `/documents`
+
+#### c) Documents associés à un rendez-vous
+
+**Dans la timeline** (section 3.2), quand on clique sur un événement pour voir les détails :
+
+- **Section "Documents liés"** :
+  - Liste des documents associés à ce rendez-vous
+  - Possibilité d'**ajouter un document** directement depuis cette vue
+  - Bouton "Voir le document" → ouvre le document (ou redirige vers `/documents`)
+
+## 4. Actions disponibles sur la page
+
+- **Ajouter** un nouveau rendez-vous ou une étape.
+- **Modifier** un rendez-vous existant (cliquer sur la carte → éditer).
+- **Marquer comme terminé** un rendez-vous passé.
+- **Supprimer** un rendez-vous (avec confirmation douce).
+- **Uploader un document médical** :
+  - Depuis la section "Mes documents médicaux"
+  - Ou depuis les détails d'un rendez-vous spécifique
+- **Associer un document** à un rendez-vous existant.
+- **Voir les documents** associés à un rendez-vous.
+- **Filtrer** la timeline :
+  - Tous les événements
+  - Seulement les rendez-vous à venir
+  - Seulement les rendez-vous passés
+  - Par type (consultations, séances, examens)
+- **Exporter** la timeline (option future : PDF, calendrier).
+- **Importer depuis un calendrier** (option future : Google Calendar, Outlook).
+- Retour au tableau de bord.
+
+## 5. Navigation
+
+- **Depuis** : `/dashboard` (carte "Mon traitement").
+- **Vers** :
+  - `/dashboard` (retour)
+  - `/documents` (pour voir tous les documents et leur vulgarisation)
+  - `/plan-du-jour` (pour planifier autour d'un rendez-vous)
+
+## 6. Ton & style spécifiques
+
+- Toujours tutoyer (cohérent avec le reste).
+- **Rassurer** : "Tu as déjà accompli beaucoup d'étapes. On continue, pas à pas."
+- **Anticiper avec bienveillance** : "Ton prochain rendez-vous est dans 5 jours. Tu veux préparer tes questions ?"
+- **Célébrer les étapes** : "Bravo, tu as terminé ta première phase de traitement ! 🌸"
+- Éviter les formulations anxiogènes : ne pas dire "Tu as encore X séances à faire" de manière négative, plutôt "Il te reste X séances, on y va ensemble."
+- **Pour l'upload** : "Tu peux ajouter tes documents médicaux ici. Ils seront stockés en sécurité et tu pourras les retrouver facilement."
+
+## 7. Messages contextuels
+
+- Si aucun rendez-vous à venir : "Tu n'as pas de rendez-vous programmé pour le moment. Tu peux en ajouter un si besoin."
+- Si beaucoup de rendez-vous proches : "Tu as plusieurs rendez-vous cette semaine. N'hésite pas à adapter ton plan du jour en conséquence."
+- Si un rendez-vous approche : "Ton prochain rendez-vous est demain. As-tu préparé tes questions ?"
+- Si aucun document uploadé : "Tu peux ajouter tes documents médicaux ici pour les garder à portée de main et les comprendre plus facilement."
+- Après un upload réussi : "Document ajouté ! Tu peux le retrouver dans la section Documents pour voir son résumé simplifié."
+
+## 8. Idées futures / questions
+
+- **Lier les documents médicaux** aux rendez-vous (ex : "Compte-rendu de consultation du 15 mars" lié au rendez-vous du 15 mars).
+- **Suggérer des questions à poser** selon le type de rendez-vous (ex : avant une consultation d'oncologie, suggérer des questions courantes).
+- **Rappels automatiques** (notification douce X jours avant un rendez-vous).
+- **Statistiques simples** : "Tu as eu X consultations ce mois-ci", "Durée moyenne entre deux séances : Y jours".
+- **Intégration calendrier externe** : synchroniser avec Google Calendar, Apple Calendar, etc.
+- **Upload par photo** : permettre de prendre une photo directement depuis le téléphone pour uploader un document.
+- **Vulgarisation automatique** : après upload, proposer directement de voir le résumé simplifié du document.

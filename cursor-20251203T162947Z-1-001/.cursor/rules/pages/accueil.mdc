@@ -1,0 +1,68 @@
+# Page d'accueil – BreastWise
+
+## 1. Objectif de la page
+
+- Accueillir l'utilisatrice dans un espace rassurant.
+- Expliquer en quelques phrases simples ce qu'est BreastWise.
+- Montrer les bénéfices concrets : organisation, compréhension, soutien émotionnel.
+- Orienter vers : **Créer un compte** ou **Se connecter**.
+
+## 2. Route
+
+- URL : `/`
+
+## 3. Contenu principal
+
+### 3.1 Section Héros (haut de page)
+
+- **Titre** (exemple) :
+  > « À vos côtés, pas à pas, tout au long de votre parcours. »
+
+- **Sous-titre** (exemple) :
+  > « BreastWise vous aide à organiser votre quotidien, comprendre vos documents médicaux et prendre soin de vous émotionnellement. »
+
+- **Boutons principaux** :
+  - Bouton 1 : « Créer mon espace » → route `/signup`
+  - Bouton 2 : « J'ai déjà un compte » → route `/login`
+
+- **Éventuelle image / illustration** :
+  - Illustration douce (femme accompagnée, pas de visuel choquant ou médical agressif).
+
+### 3.2 Section "Comment BreastWise vous aide"
+
+- 3 blocs, par exemple :
+
+  - **Bloc 1 – Organiser mon quotidien**
+    - Phrase courte : « Un tableau de bord clair pour visualiser votre énergie, votre humeur et l'évolution de votre traitement. »
+
+  - **Bloc 2 – Suivre mon traitement**
+    - Phrase courte : « Un aperçu simple de vos prochains rendez-vous, des étapes importantes et des séances déjà réalisées. »
+
+  - **Bloc 3 – Me sentir soutenue**
+    - Phrase courte : « Un journal guidé et des exercices pour déposer ce que vous ressentez. »
+
+### 3.3 Section "À qui s'adresse BreastWise ?"
+
+- Texte simple :
+  - « Pour les femmes qui avancent pas à pas dans un parcours médical intense. »
+  - « Pour celles qui jonglent avec la fatigue, les rendez-vous et la charge mentale. »
+  - « Pour celles qui cherchent des outils pour mieux prendre soin d'elles-mêmes au quotidien. »
+
+### 3.4 Section "Respect et confidentialité"
+
+- Petit encadré rassurant :
+  - « Vos données sont privées et protégées. »
+  - « Vous pouvez supprimer vos informations à tout moment. »
+  - (Les détails techniques viendront plus tard, mais le message est posé.)
+
+## 4. Actions disponibles sur la page
+
+- Cliquer sur « Créer mon espace » → aller vers `/signup`.
+- Cliquer sur « J'ai déjà un compte » → aller vers `/login`.
+- Scroller pour lire les sections d'explication.
+
+## 5. Ton et style spécifiques à cette page
+
+- Ton particulièrement rassurant et accueillant.
+- Ne pas utiliser de termes médicaux compliqués ici.
+- Mettre l'accent sur l'idée : **"Vous n'êtes pas seule"** et **"On va y aller pas à pas"**.

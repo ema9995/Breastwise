@@ -1,0 +1,70 @@
+# Page de connexion – BreastWise
+
+## 1. Objectif de la page
+
+- Permettre à une utilisatrice qui a déjà un compte de se connecter à son espace.
+- La rassurer dès l'arrivée (ton doux, pas culpabilisant si elle "a oublié").
+- Rediriger vers le **tableau de bord** (`/dashboard`) une fois connectée.
+
+## 2. Route
+
+- URL : `/login`
+
+## 3. Contenu principal
+
+### 3.1 Titre & introduction
+
+- **Titre** (exemple) :
+  > « Heureuse de vous revoir. »
+
+- **Texte introductif** (exemple) :
+  > « Connectez-vous pour retrouver votre tableau de bord, votre journal et vos documents. »
+
+### 3.2 Formulaire de connexion
+
+Champs :
+
+- **Adresse e-mail**
+  - Label : « Adresse e-mail »
+  - Placeholder : « vous@exemple.com »
+  - Aide : petit texte discret si besoin (« Utilisez l'adresse avec laquelle vous avez créé votre compte. »)
+
+- **Mot de passe**
+  - Label : « Mot de passe »
+  - Placeholder : « Votre mot de passe »
+  - Option : lien « J'ai oublié mon mot de passe » (même si ce n'est pas encore fonctionnel au début).
+
+Bouton principal :
+
+- Texte : **« Me connecter »**
+- Action : envoyer le formulaire, puis (dans un premier temps) rediriger vers `/dashboard` si tout est OK.
+
+Lien secondaire :
+
+- Texte : « Je n'ai pas encore de compte »
+- Lien vers : `/signup`
+
+### 3.3 Messages d'erreur / d'aide
+
+- Si les champs sont vides :
+  - Message : « Merci de renseigner votre e-mail et votre mot de passe. »
+
+- Si e-mail au mauvais format :
+  - Message : « Ce format d'e-mail ne semble pas valide. »
+
+- Si identifiants invalides (plus tard, quand on aura une vraie auth) :
+  - Message : « Nous ne reconnaissons pas ces identifiants. Vous pouvez vérifier vos informations ou réessayer plus tard. »
+
+Ton : toujours doux, jamais culpabilisant.
+
+## 4. Comportement après connexion
+
+- Si la connexion réussit :
+  - Redirection automatique vers : `/dashboard`
+  - (Plus tard, un petit message en haut du tableau de bord du type : « Contente de vous retrouver. »)
+
+## 5. Ton & style pour cette page
+
+- Ambiance calme, rassurante.
+- Pas de phrases du type « identifiant incorrect » trop sèches → préférer des formulations douces.
+- Rappeler qu'on peut revenir plus tard, que ce n'est pas grave si on s'est trompée.

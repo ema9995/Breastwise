@@ -1,0 +1,98 @@
+# Tableau de bord – BreastWise
+
+## 1. Objectif de la page
+
+- Accueillir l'utilisatrice après sa connexion.
+- Lui donner une vision rapide de son état et de ses priorités du jour.
+- Donner un **aperçu de chaque grande zone du site** (état du jour, traitement, plan, journal, bien-être, documents) avec un bouton clair pour aller plus loin.
+- Créer un climat doux, motivant, sans pression.
+
+## 2. Route
+
+- URL : `/dashboard`
+- Arrivée principale : après une connexion réussie depuis `/login`.
+
+## 3. Contenu principal
+
+### 3.1 Message de bienvenue
+
+- **Texte dynamique avec prénom** :
+  - Exemple : `Bonjour, Sarah 🌸`
+  - Si le prénom n'est pas encore connu : `Bonjour 🌸`
+
+- **Petit mot ou citation de motivation** (une phrase courte) :
+  - Exemple 1 : `Rien n'est facile, mais tout est possible.`
+  - Exemple 2 : `Aujourd'hui, on avance à ton rythme, pas à pas.`
+  - Idée : texte changeable (liste de citations possibles dans un fichier plus tard).
+
+### 3.2 Aperçus des sous-pages (cartes / étiquettes)
+
+Chaque bloc est une **carte** avec :
+- un **titre**,
+- une **phrase d'explication très courte**,
+- une **mini info / aperçu** (quand on aura des données),
+- un **bouton clair** qui mène vers la page dédiée.
+
+#### a) Carte "État du jour"
+- Titre : `Mon état du jour`
+- Sous-texte :  
+  - Exemple : `Comment tu te sens aujourd'hui ?`
+- Aperçu (plus tard) :
+  - Derniers niveaux saisis : énergie / fatigue / humeur.
+- Bouton :
+  - Texte : **« Mettre à jour mon état »**
+  - Action : ouvre la page `/etat-du-jour` ou un formulaire rapide sur place.
+
+#### b) Carte "Mon traitement"
+- Titre : `Mon traitement`
+- Sous-texte :
+  - Exemple : `Tes prochaines étapes médicales en un coup d'œil.`
+- Aperçu :
+  - Prochain rendez-vous (date + type).
+  - Ex : `Prochain rendez-vous : 12 mars – Oncologue`.
+- Bouton :
+  - Texte : **« Voir mon suivi complet »**
+  - Action : va vers `/traitement`.
+
+#### c) Carte "Plan de ma journée"
+- Titre : `Plan de ma journée`
+- Sous-texte :
+  - Exemple : `Un petit plan adapté à ton énergie du jour.`
+- Aperçu :
+  - Exemple : `3 actions proposées aujourd'hui` ou `Tu as prévu 1 moment pour toi.`
+- Bouton :
+  - Texte : **« Voir mon plan du jour »**
+  - Action : va vers `/plan-du-jour`.
+
+#### d) Carte "Mon journal"
+- Titre : `Mon journal`
+- Sous-texte :
+  - Exemple : `Un espace pour déposer ce que tu ressens.`
+- Aperçu :
+  - Dernière entrée : date ou petit extrait (plus tard).
+  - Exemple : `Dernière écriture : hier`.
+- Bouton :
+  - Texte : **« Écrire dans mon journal »**
+  - Action : va vers `/journal`.
+
+#### e) Carte "Prendre soin de moi"
+- Titre : `Prendre soin de moi`
+- Sous-texte :
+  - Exemple : `Des exercices doux pour t'aider à souffler.`
+- Aperçu :
+  - Exemple : `Suggestion du moment : exercice de respiration (5 minutes).`
+- Bouton :
+  - Texte : **« Explorer les exercices »**
+  - Action : va vers `/bien-etre`.
+
+## 4. Actions globales sur la page
+
+- Cliquer sur une carte → aller à la page correspondante.
+- (Plus tard) un bouton en haut à droite : `Se déconnecter`.
+- (Plus tard) une petite zone : `Aujourd'hui, tu as déjà…` (nombre d'actions faites / moment pour soi, etc.).
+
+## 5. Ton & style spécifiques
+
+- Toujours tutoyer si tu choisis ce ton partout (sinon, on repassera en "vous" partout).
+- Langage doux, pas d'injonction ("tu dois…"), plutôt des invitations ("tu peux…").
+- Une seule idée forte : **« On avance à ton rythme, pas à pas. »**

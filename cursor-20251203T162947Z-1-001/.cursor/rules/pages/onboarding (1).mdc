@@ -1,0 +1,382 @@
+# Page d'onboarding – BreastWise
+
+## 1. Objectif de la page
+
+- Accueillir les nouvelles utilisatrices après leur inscription.
+- Collecter des données essentielles pour pré-remplir le tableau de bord.
+- Guider l'utilisatrice dans la découverte de BreastWise de manière douce et non intrusive.
+- Permettre de passer certaines étapes si l'utilisatrice préfère compléter plus tard.
+
+## 2. Route
+
+- URL : `/onboarding`
+- Accès : redirection automatique après inscription réussie depuis `/signup`.
+- Protection : accessible uniquement si `onboarding_completed = false` dans la table `users`.
+
+## 3. Design : Stepper (étapes visibles)
+
+- **Indicateur de progression** en haut de page :
+  - Affichage des étapes : "Étape 1 sur 4", "Étape 2 sur 4", etc.
+  - Barre de progression visuelle.
+  - Étapes complétées marquées comme ✅.
+  - Étape actuelle mise en évidence.
+  - Étapes futures grisées.
+
+- **Navigation** :
+  - Bouton "Précédent" (sauf à l'étape 1).
+  - Bouton "Continuer" / "Passer cette étape" (selon l'étape).
+  - Possibilité de sauvegarder et quitter (optionnel).
+
+## 4. Contenu principal
+
+### 4.1 Étape 1 : Message de bienvenue
+
+**Titre :** "Bienvenue, [Prénom] ! 🌸"
+
+**Message principal :**
+> "On va faire connaissance en quelques questions simples. Tu peux passer certaines étapes si tu préfères les compléter plus tard dans ton espace."
+
+**Indicateur :** "Étape 1 sur 4"
+
+**Bouton :** "Commencer" → passe à l'Étape 2
+
+---
+
+### 4.2 Étape 2 : État du jour (obligatoire)
+
+**Titre :** "Comment te sens-tu aujourd'hui ?"
+
+**Introduction :**
+> "Cette information nous aide à mieux t'accompagner. C'est la seule étape obligatoire."
+
+#### Questions :
+
+1. **Niveau d'énergie** (slider 1-5)
+   - Texte : "Sur une échelle de 1 à 5, comment évalues-tu ton niveau d'énergie aujourd'hui ?"
+   - Labels : 
+     - 1 = "Très faible"
+     - 2 = "Faible"
+     - 3 = "Moyen"
+     - 4 = "Bon"
+     - 5 = "Très bonne"
+   - **Obligatoire** ✅
+   - Valeur par défaut : 3
+
+2. **Niveau de fatigue** (slider 1-5)
+   - Texte : "Et ton niveau de fatigue ?"
+   - Labels :
+     - 1 = "Pas fatiguée"
+     - 2 = "Légèrement fatiguée"
+     - 3 = "Modérément fatiguée"
+     - 4 = "Très fatiguée"
+     - 5 = "Extrêmement fatiguée"
+   - **Obligatoire** ✅
+   - Valeur par défaut : 3
+
+3. **Humeur** (sélection multiple ou boutons)
+   - Texte : "Comment te sens-tu émotionnellement ? (tu peux en sélectionner plusieurs)"
+   - Options (boutons cliquables) :
+     - 😌 Calme
+     - 😰 Anxieuse
+     - 😴 Fatiguée
+     - 💪 Motivée
+     - 😢 Triste
+     - ☺️ Sereine
+     - 😟 Inquiète
+     - 🌟 Optimiste
+   - **Obligatoire** ✅ (au moins une sélection)
+   - Possibilité de sélectionner plusieurs émotions
+
+4. **Note libre** (optionnel)
+   - Texte : "Un mot sur ta journée ? (optionnel)"
+   - Champ texte libre (textarea, max 500 caractères)
+   - Placeholder : "Comment s'est passée ta journée ?"
+
+**Boutons :**
+- "Continuer" → Étape 3 (désactivé si énergie, fatigue ou humeur non renseignés)
+- "Passer cette étape" → **DÉSACTIVÉ** (étape obligatoire)
+
+---
+
+### 4.3 Étape 3 : Questionnaire traitement (spécifique cancer du sein)
+
+> Objectif : collecter dès l'onboarding les données nécessaires pour alimenter la carte "Mon traitement" du `/dashboard` (prochain rendez-vous, progression des séances, jalons) et pré-remplir la timeline `/traitement`.
+
+**Titre :** "Parle-moi de ton parcours médical"
+
+**Introduction :**
+> "Ces informations nous aideront à mieux t'accompagner. Tu peux passer cette étape et compléter plus tard si tu préfères."
+
+**Indicateur :** "Étape 3 sur 4"
+
+#### 3.1 Phase actuelle du traitement
+
+**Question :** "Où en es-tu dans ton parcours ?"
+
+Options (sélection unique, boutons radio) :
+- "Je n'ai pas encore commencé de traitement" → **dashboard** affiche "Aucun traitement commencé".
+- "Je suis en cours de diagnostic" → **dashboard** affiche "Diagnostic en cours" sans rendez-vous programmé.
+- "Je suis en cours de traitement" → **affiche les sous-sections 3.2 à 3.6**.
+- "Je suis en suivi post-traitement" → **dashboard** affiche "Suivi post-traitement".
+- "Je préfère ne pas répondre".
+
+**Données stockées :**
+- `treatment_status` (enum : `none`, `diagnostic`, `in_treatment`, `follow_up`, `unknown`) pour alimenter l'état visuel de la carte dashboard.
+
+#### 3.2 Types de traitement (si "en cours de traitement" sélectionné)
+
+**Question :** "Quels types de traitement fais-tu actuellement ?"
+
+Options (sélection multiple, cases à cocher) :
+- ☐ Chimiothérapie
+- ☐ Radiothérapie
+- ☐ Chirurgie (opération)
+- ☐ Hormonothérapie
+- ☐ Immunothérapie
+- ☐ Autre traitement (préciser) → champ texte libre
+
+**Logique :** Si une option est cochée, afficher la sous-section correspondante.
+
+**Données stockées :**
+- Liste des types actifs pour pré-remplir les filtres de la timeline et les badges du dashboard.
+
+#### 3.3 Détails chimiothérapie (si sélectionné)
+
+**Titre :** "Détails sur ta chimiothérapie"
+
+**Questions (données envoyées vers `treatment_sessions`) :**
+
+1. **Date de début** (date picker JJ/MM/AAAA)
+2. **Nombre total de séances prévues** (min 1, max 50)
+3. **Séance actuelle** (validation ≤ total)
+4. **Fréquence** (hebdo / toutes les 2 semaines / toutes les 3 semaines / autre + texte)
+5. **Prochaine séance (date + heure)** → utilisé pour "Prochain rendez-vous" du dashboard
+6. **Lieu** (texte)
+7. **Oncologue** (optionnel)
+
+**Données dérivées pour le dashboard :**
+- Prochain rendez-vous : `type=chimio`, `start_datetime`, `doctor_name`, `location`.
+- Avancement : `current / total` pour afficher "Séance X/Y".
+
+#### 3.4 Détails radiothérapie (si sélectionné)
+
+**Titre :** "Détails sur ta radiothérapie"
+
+**Questions (données `treatment_sessions`) :**
+1. Date de début
+2. Nombre total de séances prévues
+3. Séance actuelle
+4. Fréquence (quotidienne / autre + texte)
+5. Prochaine séance (date + heure)
+6. Lieu
+7. Radiothérapeute (optionnel)
+
+**Données dérivées dashboard :**
+- Prochain rendez-vous radio + progression éventuelle.
+
+#### 3.5 Chirurgie (si sélectionné)
+
+**Titre :** "Informations sur ta chirurgie"
+
+**Questions (données `treatment_sessions`) :**
+1. **Statut de l'opération**
+   - "Oui, j'ai déjà été opérée" → champ date passée
+   - "Non, mais une opération est prévue" → champ date prévue (futur)
+   - "Je ne sais pas encore"
+2. **Type d'opération** (sélection multiple)
+   - Tumorectomie, Mastectomie partielle, Mastectomie totale, Reconstruction mammaire, Autre (+ texte)
+3. **Date de l'opération** (si prévue)
+4. **Lieu**
+5. **Chirurgien** (optionnel)
+
+**Données dérivées dashboard :**
+- Si date future : "Prochaine opération : [date]" dans la carte traitement.
+- Si passée : jalon "Opération réalisée" dans timeline.
+
+#### 3.6 Autres rendez-vous médicaux
+
+**Titre :** "As-tu d'autres rendez-vous médicaux à venir ?"
+
+**Bouton :** "Ajouter un rendez-vous" → ouvre un formulaire modal
+
+**Pour chaque rendez-vous ajouté (création d'une entrée `treatment_sessions`) :**
+- **Type** (liste déroulante) : Consultation / Examen / Autre rendez-vous médical
+- **Date et heure** (datetime picker)
+- **Avec qui** (optionnel, texte)
+- **Lieu** (optionnel, texte)
+- **Notes** (optionnel)
+
+**Affichage :** Liste des rendez-vous ajoutés avec possibilité de supprimer chacun.
+
+**Données dérivées dashboard :**
+- Le prochain événement (tri par date) alimente la ligne "Prochain rendez-vous : 12 mars – Oncologue".
+
+#### 3.7 Équipe médicale (optionnel)
+
+**Titre :** "Veux-tu enregistrer les membres de ton équipe médicale ?"
+
+**Introduction :**
+> "C'est optionnel, tu pourras les ajouter plus tard si tu préfères."
+
+**Bouton :** "Ajouter un professionnel" → ouvre un formulaire
+
+**Pour chaque professionnel :**
+
+- **Nom** (obligatoire)
+- **Spécialité** (liste déroulante : Oncologue, Chirurgien, Radiothérapeute, Médecin généraliste, Infirmière, Psychologue, Kinésithérapeute, Autre + texte)
+- **Lieu de consultation** (optionnel)
+
+**Utilisation dashboard :**
+- Afficher "Oncologue : Dr [Nom]" si renseigné pour contextualiser le prochain rendez-vous.
+
+**Boutons :**
+- "Continuer" → Étape 4
+- "Passer cette étape" → Étape 4 (avec message : "Tu pourras compléter ces informations plus tard dans la section 'Mon traitement'")
+
+---
+
+### 4.4 Étape 4 : Plan du jour (optionnel)
+
+**Titre :** "Veux-tu qu'on te propose un plan pour aujourd'hui ?"
+
+**Indicateur :** "Étape 4 sur 4"
+
+**Message :**
+> "Basé sur ton état du jour et tes rendez-vous, on peut te suggérer un plan adapté. Tu peux aussi le faire plus tard."
+
+**Options (boutons radio) :**
+
+1. **"Oui, génère-moi un plan pour aujourd'hui"**
+   - → Affiche un loader "Génération de ton plan..."
+   - → Appelle la logique de génération automatique
+   - → Affiche le plan généré avec possibilité de modifier
+
+2. **"Non, je préfère le faire plus tard"**
+   - → Passe directement à l'étape finale
+
+#### Si "Oui" sélectionné :
+
+**Affichage du plan généré :**
+
+- **Titre :** "Voici ton plan pour aujourd'hui"
+
+- **Liste des tâches proposées** (basées sur) :
+  - État du jour (énergie, fatigue)
+  - Rendez-vous du jour (si renseignés)
+  - Règles de génération (ex: si fatigue élevée → proposer repos)
+
+- **Chaque tâche affichée avec :**
+  - ☐ Case à cocher (non cochée par défaut)
+  - Titre de la tâche
+  - Catégorie (Médical, Bien-être, Quotidien, Repos)
+  - Heure suggérée (optionnel)
+  - Bouton "Modifier" ou "Supprimer"
+
+- **Bouton :** "Ajouter une tâche personnalisée" → ouvre un formulaire
+
+- **Boutons de validation :**
+  - "Valider ce plan" → sauvegarde et passe à l'étape finale
+  - "Modifier le plan" → permet d'éditer
+  - "Générer un autre plan" → régénère avec des suggestions différentes
+
+**Boutons :**
+- "Valider ce plan" → Étape finale
+- "Passer cette étape" → Étape finale
+
+---
+
+### 4.5 Étape finale : Finalisation
+
+**Titre :** "C'est tout ! Ton espace est prêt 🌸"
+
+**Message de félicitation :**
+> "Bravo, tu as complété ton onboarding ! Ton espace est maintenant personnalisé pour t'accompagner au mieux."
+
+**Récapitulatif des données collectées :**
+
+- ✅ "État du jour enregistré" (toujours présent)
+- ✅ "Informations de traitement enregistrées" (si complétées)
+- ✅ "Plan du jour créé" (si généré)
+
+**Message rassurant :**
+> "Tu peux modifier ou compléter ces informations à tout moment depuis ton tableau de bord."
+
+**Bouton principal :**
+- **"Accéder à mon tableau de bord"** → `/dashboard`
+  - Style : grand bouton, couleur principale
+  - Action : rediriger vers `/dashboard`
+
+**Bouton secondaire (optionnel) :**
+- "Compléter plus tard" → `/dashboard` (même action, mais message différent)
+
+---
+
+## 5. Comportement après onboarding
+
+### 5.1 Redirection vers le dashboard
+
+Après avoir cliqué sur "Accéder à mon tableau de bord" :
+
+1. Redirection vers `/dashboard`
+2. Le dashboard détecte que l'onboarding est complété et affiche les données collectées
+
+---
+
+## 6. Gestion des erreurs et cas limites
+
+### 6.1 Si l'utilisatrice quitte avant la fin
+
+- **Sauvegarde progressive :** Les données sont sauvegardées à chaque étape validée.
+- **Reprise :** Si l'utilisatrice revient sur `/onboarding` et que `onboarding_completed = false`, elle reprend où elle s'est arrêtée (optionnel, peut être ajouté plus tard).
+
+### 6.2 Si l'utilisatrice passe toutes les étapes optionnelles
+
+- Le dashboard affichera des messages d'invitation pour compléter les sections vides.
+- Pas de problème, l'utilisatrice peut compléter plus tard.
+
+### 6.3 Validation des champs
+
+- **Étape 2 (obligatoire) :** Empêcher de continuer si énergie, fatigue ou humeur non renseignés.
+- **Étape 3 :** Validation des dates (ne pas permettre une date passée pour une séance future, etc.).
+- **Messages d'erreur :** Toujours bienveillants et clairs.
+
+---
+
+## 7. Ton & style spécifiques
+
+- **Tutoiement** (cohérent avec le reste du site).
+- **Langage rassurant** : "Tu peux passer cette étape", "C'est optionnel", "Tu pourras compléter plus tard".
+- **Pas de pression** : Toujours rappeler que l'utilisatrice peut compléter plus tard.
+- **Célébrations douces** : "Bravo", "C'est tout !", "Ton espace est prêt 🌸".
+- **Messages d'aide** : Petits textes explicatifs sous chaque question si besoin.
+
+---
+
+## 8. Navigation
+
+- **Depuis :** `/signup` (après inscription réussie).
+- **Vers :**
+  - `/dashboard` (après finalisation).
+  - Possibilité de retourner à `/login` (si l'utilisatrice se déconnecte).
+
+---
+
+## 9. Protection de la route
+
+- **Middleware :** Vérifier que l'utilisatrice est connectée.
+- **Vérification :** Si `onboarding_completed = true`, rediriger automatiquement vers `/dashboard`.
+- **Logique :** La page `/onboarding` n'est accessible que si `onboarding_completed = false`.
+
+---
+
+## 10. Données utilisées
+
+- **Tables** :
+  - `daily_states` (état du jour)
+  - `treatment_sessions` (séances et rendez-vous)
+  - `day_plans` et `day_tasks` (plan du jour, si généré)
+  - `users` (mise à jour de `onboarding_completed`)
+  - Voir `.cursor/rules/modeles_donnees.mdc` pour le modèle complet
+- **Opérations** :
+  - Écriture : insertion des données collectées dans les tables correspondantes
+  - Mise à jour : `onboarding_completed = true` dans `users` après finalisation

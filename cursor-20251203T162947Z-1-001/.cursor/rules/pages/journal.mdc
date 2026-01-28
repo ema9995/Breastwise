@@ -1,0 +1,206 @@
+# Page "Mon journal" – BreastWise
+
+## 1. Objectif de la page
+
+- Créer un **espace de bien-être et d'expression** où l'utilisatrice se sent en sécurité et apaisée.
+- Permettre d'**exprimer ses émotions** de manière libre ou guidée (questions bienveillantes).
+- Offrir des **outils d'écriture thérapeutique** (exercices, templates, prompts).
+- Proposer un **soutien émotionnel personnalisé** via des messages bienveillants basés sur les écrits.
+- Mettre en avant les **moments de force et de lumière** pour nourrir la résilience.
+- Créer une **expérience apaisante** (design doux, espace de calme intégré).
+
+## 2. Route
+
+- URL : `/journal`
+- Accès : depuis le tableau de bord (`/dashboard`) via la carte "Mon journal".
+
+## 3. Contenu principal
+
+### 3.1 Zone d'accueil & pause
+
+**Message bienveillant du jour** (en haut de page) :
+- Exemple : "Prends le temps dont tu as besoin. Cet espace est à toi. 🌸"
+- Exemple : "Il n'y a pas de bonne ou de mauvaise façon d'écrire. Laisse-toi guider."
+- Messages qui varient selon le contexte (journée difficile détectée, anniversaire d'une étape, etc.).
+
+**Bouton "Pause"** (bien visible) :
+- Texte : "Prendre une pause" ou "Respirer un instant"
+- Action : ouvre un **exercice de respiration guidé** (2-3 minutes)
+- Design : icône de respiration, animation douce
+- Après la pause : retour à la page avec message "Tu es prête à écrire quand tu veux."
+
+### 3.2 Section "Écrire aujourd'hui"
+
+**Choix du mode d'écriture** :
+
+#### a) Mode libre
+- **Grand champ de texte** (zone confortable, police lisible, espacement généreux).
+- Placeholder doux : "Écris ce qui te passe par la tête. Il n'y a pas de règles ici."
+- Options :
+  - Compteur de mots (optionnel, pas de pression)
+  - Sauvegarde automatique (toutes les 30 secondes)
+  - Bouton "Enregistrer" visible
+
+#### b) Mode guidé (questions bienveillantes)
+- **Sélection de contexte** (optionnel) :
+  - "Un jour difficile"
+  - "Un jour de joie"
+  - "Je ne sais pas par où commencer"
+  - "Je veux juste écrire librement"
+
+- **Questions adaptées au contexte** :
+
+  *Si "Un jour difficile"* :
+  - "Qu'est-ce qui rend cette journée difficile ?"
+  - "Qu'est-ce qui t'a aidée aujourd'hui, même un tout petit peu ?"
+  - "Qu'est-ce que tu aimerais laisser partir ?"
+  - "Qui ou quoi t'a soutenue aujourd'hui ?"
+
+  *Si "Un jour de joie"* :
+  - "Qu'est-ce qui t'a fait sourire ou te sentir bien aujourd'hui ?"
+  - "Quelle petite victoire veux-tu célébrer ?"
+  - "Qui ou quoi t'a apporté de la lumière aujourd'hui ?"
+  - "Comment veux-tu te souvenir de ce moment ?"
+
+  *Si "Je ne sais pas par où commencer"* :
+  - "Comment te sens-tu en ce moment, physiquement et émotionnellement ?"
+  - "Qu'est-ce qui occupe ton esprit en ce moment ?"
+  - "Qu'est-ce qui t'a marquée aujourd'hui, même de façon subtile ?"
+  - "Pour quoi es-tu reconnaissante aujourd'hui ?"
+
+- **Affichage** : une question à la fois, avec possibilité de passer à la suivante ou de répondre librement.
+- **Bouton "J'ai fini de répondre"** → sauvegarde + passage au message de soutien.
+
+#### c) Templates d'écriture
+- **Bouton "Utiliser un template"** :
+  - Template "Lettre à mon futur moi" : pour se projeter positivement
+  - Template "Mes forces intérieures" : liste de ressources personnelles
+  - Template "Journal de gratitude" : 3 choses par jour
+  - Template "Libération émotionnelle" : ce que je veux laisser partir
+
+### 3.3 Section "Message de soutien" (après l'écriture)
+
+Une fois l'entrée enregistrée, affichage d'un **message bienveillant personnalisé** :
+
+- **Basé sur le contenu** (analyse douce par IA, pas médicale, juste empathique) :
+  - Si tristesse détectée : "Tu as traversé une journée difficile. C'est normal de ressentir cela. Tu es forte, même quand tu ne le sens pas. 🌸"
+  - Si joie détectée : "C'est beau de voir ces moments de lumière. Garde-les précieusement, ils font partie de ta force."
+  - Si questions médicales : "Tu as des questions importantes. N'hésite pas à les noter pour ton prochain rendez-vous ou à explorer la section documents."
+
+- **Suggestions douces** (liens vers autres sections) :
+  - "Veux-tu faire un exercice de respiration pour te détendre ?" → `/bien-etre`
+  - "Peut-être adapter ton plan du jour selon ce que tu ressens ?" → `/plan-du-jour`
+  - "Tu veux explorer un exercice d'écriture différent ?" → section exercices ci-dessous
+
+### 3.4 Section "Mes écrits"
+
+**Liste des entrées** (chronologique, du plus récent au plus ancien) :
+
+Chaque entrée affiche :
+- **Date** (format lisible : "Aujourd'hui", "Hier", "15 mars 2024")
+- **Extrait** (premières lignes, max 150 caractères)
+- **Contexte** (si mode guidé : "Après mon rendez-vous", "Jour difficile", etc.)
+- **Icône d'émotion** (optionnelle, si l'utilisatrice l'a renseignée)
+
+**Actions sur chaque entrée** :
+- Cliquer pour **lire l'entrée complète**
+- **Modifier** (éditer le texte)
+- **Supprimer** (avec confirmation douce : "Es-tu sûre de vouloir supprimer cette entrée ?")
+- **Verrouiller** (option future : rendre une entrée privée avec mot de passe)
+
+**Filtres** :
+- Par période (7 derniers jours, 30 derniers jours, 3 mois, tout)
+- Par contexte (tous, après rendez-vous, jour difficile, jour de joie, etc.)
+- Par recherche de mots-clés (option future)
+
+### 3.5 Section "Mes moments de lumière"
+
+**Bloc dédié** qui met en avant les **extraits positifs** du journal :
+
+- **Extraits automatiques** (basés sur des mots-clés positifs ou sélection manuelle par l'utilisatrice) :
+  - Exemple : "Il y a 2 semaines, tu écrivais : 'Aujourd'hui, j'ai réussi à faire une promenade. C'était doux.'"
+  - Exemple : "Tu as noté plusieurs fois cette semaine des moments de gratitude. C'est précieux."
+
+- **Citations personnalisées** : l'utilisatrice peut **marquer** des extraits comme "moments de lumière" pour les retrouver facilement.
+
+- **Message bienveillant** : "Ces moments font partie de ta force. Reviens les lire quand tu en as besoin."
+
+### 3.6 Section "Exercices d'écriture thérapeutique"
+
+**Bibliothèque d'exercices** (cartes cliquables) :
+
+1. **"Lettre à mon futur moi"**
+   - Description : "Écris une lettre à la personne que tu seras dans 3 ou 6 mois. Que veux-tu lui dire ?"
+   - Durée estimée : 10-15 minutes
+
+2. **"Mes forces intérieures"**
+   - Description : "Liste tes ressources, tes qualités, ce qui te fait tenir. Reviens-y quand tu en as besoin."
+   - Durée estimée : 5-10 minutes
+
+3. **"Journal de gratitude"**
+   - Description : "Note 3 choses pour lesquelles tu es reconnaissante aujourd'hui, même petites."
+   - Durée estimée : 5 minutes
+
+4. **"Libération émotionnelle"**
+   - Description : "Écris ce que tu veux laisser partir aujourd'hui. Puis, symboliquement, tu peux 'brûler' cette page (supprimer) ou la garder."
+   - Durée estimée : 10 minutes
+
+5. **"Visualisation positive"**
+   - Description : "Imagine-toi dans quelques mois. Comment te vois-tu ? Qu'est-ce qui t'aide à avancer ?"
+   - Durée estimée : 10-15 minutes
+
+6. **"Conversation avec mon corps"**
+   - Description : "Écris une lettre à ton corps. Remercie-le pour ce qu'il fait, écoute ce qu'il a à te dire."
+   - Durée estimée : 10-15 minutes
+
+Chaque exercice ouvre un **template guidé** avec des questions et un espace d'écriture.
+
+**Messages de rappel bienveillants** :
+- "Il y a 2 semaines, tu écrivais que... Comment te sens-tu par rapport à cela aujourd'hui ?"
+- "Tu n'as pas écrit depuis 3 jours. Pas de pression, mais cet espace t'attend si tu en as besoin."
+
+## 4. Actions disponibles sur la page
+
+- **Écrire** (mode libre, guidé, ou avec template).
+- **Prendre une pause** (exercice de respiration).
+- **Lire** ses anciennes entrées.
+- **Modifier** une entrée existante.
+- **Supprimer** une entrée (avec confirmation).
+- **Marquer** des extraits comme "moments de lumière".
+- **Filtrer** les entrées (période, contexte, recherche).
+- **Faire un exercice** d'écriture thérapeutique.
+- Retour au tableau de bord.
+
+## 5. Navigation
+
+- **Depuis** : `/dashboard` (carte "Mon journal").
+- **Vers** :
+  - `/dashboard` (retour)
+  - `/bien-etre` (si suggestion d'exercice de respiration)
+  - `/plan-du-jour` (si suggestion d'adapter le plan)
+  - `/documents` (si question médicale détectée)
+
+## 6. Ton & style spécifiques
+
+- **Toujours tutoyer** (cohérent avec le reste).
+- **Jamais de jugement** : "Tu as écrit sur X" (pas "Tu devrais écrire sur Y").
+- **Invitations douces** : "Tu peux...", "Si tu veux...", "N'hésite pas à..."
+- **Rassurer sur l'intimité** : "Cet espace est à toi. Personne ne le lira sans ton accord."
+- **Valider les émotions** : "Toutes tes émotions sont valides. Il n'y a pas de bonne ou de mauvaise façon de ressentir."
+- **Célébrer les petits pas** : "Tu as pris le temps d'écrire aujourd'hui. C'est déjà un acte de bienveillance envers toi-même."
+
+## 7. Design & ambiance
+
+- **Palette de couleurs douces** : roses pâles, lavandes, beiges, blancs.
+- **Typographie lisible** : police confortable, taille adaptée, espacement généreux.
+- **Animations subtiles** : transitions douces, pas de distractions.
+- **Mode sombre** optionnel (pour le soir, moins de fatigue visuelle).
+- **Espace aéré** : beaucoup de blanc, pas de surcharge visuelle.
+- **Icônes douces** : émojis ou icônes arrondies, bienveillantes.
+
+## 8. Messages contextuels
+
+- **Première visite** : "Bienvenue dans ton espace d'expression. Ici, tu peux écrire librement, répondre à des questions, ou explorer des exercices. Prends le temps dont tu as besoin."
+- **Aucune entrée** : "Cet espace t'attend. Tu peux commencer par écrire librement ou répondre à une question guidée."
+- **Dernière entrée il y a plusieurs jours** : "Tu n'as pas écrit depuis X jours. Pas de pression, mais cet espace est là si tu en as besoin."
+- **Beaucoup d'entrées récentes** : "Tu prends bien soin de toi en écrivant régulièrement. C'est précieux."

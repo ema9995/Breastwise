@@ -1,0 +1,215 @@
+# Page d'inscription – BreastWise
+
+## 1. Objectif de la page
+
+- Permettre à une nouvelle utilisatrice de créer son compte.
+- Collecter les informations de base nécessaires pour personnaliser son expérience.
+- Rassurer sur la confidentialité et la sécurité des données.
+- Rediriger vers la page d'onboarding après inscription réussie.
+
+## 2. Route
+
+- URL : `/signup`
+- Accès : depuis la page d'accueil (`/`) via le bouton "Créer mon espace".
+- Redirection après inscription : `/onboarding`
+
+## 3. Contenu principal
+
+### 3.1 Titre & introduction
+
+**Titre :** "Créer mon espace BreastWise"
+
+**Texte introductif :**
+> "Bienvenue ! Créons ensemble ton espace personnalisé pour t'accompagner tout au long de ton parcours."
+
+**Message de confidentialité (petit encadré discret) :**
+> "Vos données sont privées et sécurisées. Nous ne partageons jamais vos informations personnelles."
+
+### 3.2 Formulaire d'inscription
+
+**Champs du formulaire :**
+
+#### a) Prénom (obligatoire)
+- **Label :** "Prénom"
+- **Type :** Texte (input text)
+- **Placeholder :** "Ton prénom"
+- **Validation :**
+  - Obligatoire
+  - Minimum 2 caractères
+  - Maximum 50 caractères
+- **Message d'erreur :** "Merci de renseigner ton prénom."
+
+#### b) Nom (obligatoire)
+- **Label :** "Nom"
+- **Type :** Texte (input text)
+- **Placeholder :** "Ton nom"
+- **Validation :**
+  - Obligatoire
+  - Minimum 2 caractères
+  - Maximum 50 caractères
+- **Message d'erreur :** "Merci de renseigner ton nom."
+
+#### c) Date de naissance (obligatoire)
+- **Label :** "Date de naissance"
+- **Type :** Date (date picker)
+- **Format :** JJ/MM/AAAA
+- **Validation :**
+  - Obligatoire
+  - Date valide
+  - L'utilisatrice doit avoir au moins 18 ans (ou ajuster selon les besoins)
+- **Message d'erreur :** "Merci de renseigner une date de naissance valide."
+
+#### d) Adresse e-mail (obligatoire)
+- **Label :** "Adresse e-mail"
+- **Type :** Email (input email)
+- **Placeholder :** "vous@exemple.com"
+- **Validation :**
+  - Obligatoire
+  - Format e-mail valide
+  - Vérifier que l'e-mail n'est pas déjà utilisé (vérification côté backend)
+- **Message d'erreur :** 
+  - Si format invalide : "Ce format d'e-mail ne semble pas valide."
+  - Si déjà utilisé : "Cet e-mail est déjà associé à un compte. Tu peux te connecter ou réinitialiser ton mot de passe."
+
+#### e) Mot de passe (obligatoire)
+- **Label :** "Mot de passe"
+- **Type :** Password (input password avec icône pour afficher/masquer)
+- **Placeholder :** "Ton mot de passe"
+- **Validation :**
+  - Obligatoire
+  - Minimum 8 caractères
+  - Recommandation : au moins une majuscule, une minuscule, un chiffre (mais pas obligatoire pour ne pas être trop strict)
+- **Indicateur de force du mot de passe :** Barre visuelle (faible/moyen/fort) - optionnel
+- **Message d'aide :** "Minimum 8 caractères recommandé."
+- **Message d'erreur :** "Le mot de passe doit contenir au moins 8 caractères."
+
+#### f) Confirmation du mot de passe (obligatoire)
+- **Label :** "Confirmer le mot de passe"
+- **Type :** Password (input password avec icône pour afficher/masquer)
+- **Placeholder :** "Confirme ton mot de passe"
+- **Validation :**
+  - Obligatoire
+  - Doit correspondre exactement au mot de passe
+- **Message d'erreur :** "Les mots de passe ne correspondent pas."
+
+### 3.3 Case à cocher (obligatoire)
+
+**Checkbox :** "J'accepte les conditions d'utilisation et la politique de confidentialité"
+
+- **Lien vers :** Conditions d'utilisation (page ou modal)
+- **Lien vers :** Politique de confidentialité (page ou modal)
+- **Validation :** Obligatoire pour pouvoir s'inscrire
+- **Message d'erreur :** "Merci d'accepter les conditions d'utilisation pour continuer."
+
+### 3.4 Bouton de soumission
+
+**Bouton principal :**
+- **Texte :** "Créer mon compte"
+- **Style :** Bouton principal (couleur principale, grand, visible)
+- **État :**
+  - Désactivé si le formulaire n'est pas valide
+  - Affiche un loader "Création de ton compte..." pendant le traitement
+
+### 3.5 Lien vers la connexion
+
+**Texte :** "Tu as déjà un compte ?"
+
+**Lien :** "Se connecter" → `/login`
+
+---
+
+## 4. Comportement après inscription
+
+### 4.1 Si l'inscription réussit
+
+1. **Création du compte** dans Supabase Auth
+2. **Sauvegarde des informations** dans la table `users`
+3. **Connexion automatique** de l'utilisatrice
+4. **Redirection** vers `/onboarding`
+
+### 4.2 Si l'inscription échoue
+
+**Messages d'erreur contextuels :**
+
+- **E-mail déjà utilisé :**
+  - Message : "Cet e-mail est déjà associé à un compte. Tu peux te connecter ou réinitialiser ton mot de passe."
+  - Lien : "Se connecter" → `/login`
+  - Lien : "J'ai oublié mon mot de passe" → `/forgot-password` (si cette page existe)
+
+- **Erreur réseau :**
+  - Message : "Une erreur s'est produite. Peux-tu réessayer dans quelques instants ?"
+
+- **Erreur de validation :**
+  - Afficher les erreurs directement sous chaque champ concerné
+
+- **Erreur serveur :**
+  - Message : "Une erreur technique s'est produite. Notre équipe a été notifiée. Peux-tu réessayer plus tard ?"
+
+**Ton :** Toujours bienveillant, jamais culpabilisant.
+
+---
+
+## 5. Validation côté client
+
+### 5.1 Validation en temps réel
+
+- **Vérifier le format** des champs au fur et à mesure de la saisie
+- **Afficher les erreurs** sous chaque champ concerné
+- **Désactiver le bouton** "Créer mon compte" si le formulaire n'est pas valide
+
+### 5.2 Validation avant soumission
+
+- Vérifier que tous les champs obligatoires sont remplis
+- Vérifier que les formats sont corrects
+- Vérifier que les mots de passe correspondent
+- Vérifier que la case "conditions d'utilisation" est cochée
+
+---
+
+## 6. Ton & style spécifiques
+
+- **Tutoiement** (cohérent avec le reste du site)
+- **Langage rassurant** : "Créons ensemble", "Ton espace personnalisé"
+- **Messages d'erreur bienveillants** : "Merci de", "Peux-tu", jamais de ton accusateur
+- **Mise en avant de la confidentialité** : Petit encadré discret mais visible
+- **Design épuré** : Formulaire clair, pas trop de champs visibles d'un coup
+
+---
+
+## 7. Navigation
+
+- **Depuis :** 
+  - Page d'accueil (`/`) via bouton "Créer mon espace"
+  - Page de connexion (`/login`) via lien "Je n'ai pas encore de compte"
+
+- **Vers :**
+  - `/onboarding` (après inscription réussie)
+  - `/login` (via lien "Tu as déjà un compte ?")
+
+---
+
+## 8. Messages contextuels
+
+- **Si l'utilisatrice hésite :** "Toutes ces informations restent privées et sécurisées."
+- **Si erreur de format :** "Merci de vérifier le format de ce champ."
+- **Si e-mail déjà utilisé :** "Cet e-mail est déjà associé à un compte. Tu peux te connecter ou réinitialiser ton mot de passe."
+- **Pendant le chargement :** "Création de ton compte en cours..."
+- **Après inscription réussie :** "Compte créé avec succès ! Redirection vers ton espace..."
+
+---
+
+## 9. Accessibilité
+
+- **Labels associés** à tous les champs
+- **Messages d'erreur** clairement associés aux champs concernés
+- **Navigation au clavier** : Tab pour naviguer entre les champs
+- **Contraste** suffisant pour la lisibilité
+- **Focus visible** sur les champs actifs
+
+---
+
+## 10. Données utilisées
+
+- **Table(s)** : `users` (voir `.cursor/rules/modeles_donnees.mdc`)
+- **Opérations** :
+  - Écriture : création d'un compte dans Supabase Auth + insertion dans `users` (prénom, nom, date de naissance, `onboarding_completed = false`)

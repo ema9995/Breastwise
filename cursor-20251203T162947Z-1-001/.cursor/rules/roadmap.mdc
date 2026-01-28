@@ -1,0 +1,159 @@
+# Roadmap BreastWise
+
+## Phase 1 – Clarifier le produit ✅
+
+- [x] Finaliser le `.cursor/rules/README.mdc`
+- [x] Créer `.cursor/rules/spec_fonctionnelle.mdc`
+- [x] Décrire toutes les pages dans `.cursor/rules/pages/`
+- [x] Créer `.cursor/rules/modeles_donnees.mdc`
+- [x] Déplacer tous les fichiers de documentation vers `.cursor/rules/`
+
+## Phase 2 – Configuration technique
+
+- [ ] **Créer un compte Supabase** et un nouveau projet
+- [ ] **Installer les dépendances** dans `app-web` :
+  - [ ] `@supabase/supabase-js` (client Supabase)
+  - [ ] `@supabase/ssr` (pour Next.js)
+  - [ ] Autres dépendances nécessaires
+- [ ] **Configurer les variables d'environnement** :
+  - [ ] Créer `.env.local` avec les clés Supabase
+  - [ ] Ajouter `.env.local` au `.gitignore`
+
+## Phase 3 – Base de données Supabase
+
+- [ ] **Créer les tables dans Supabase** (SQL Editor ou Table Editor) :
+  - [ ] Table `users` (ou utiliser l'auth Supabase)
+  - [ ] Table `daily_states`
+  - [ ] Table `treatment_sessions`
+  - [ ] Table `day_plans`
+  - [ ] Table `day_tasks`
+  - [ ] Table `journal_entries`
+  - [ ] Table `documents`
+  - [ ] Table `document_summaries`
+  - [ ] Table `document_treatment_links`
+- [ ] **Configurer les Row Level Security (RLS)** :
+  - [ ] Chaque utilisatrice ne peut voir/modifier que ses propres données
+- [ ] **Tester la connexion** depuis Next.js
+
+## Phase 4 – Authentification
+
+- [ ] **Configurer l'auth Supabase** :
+  - [ ] Activer l'authentification par email/mot de passe
+  - [ ] Configurer les emails de confirmation (optionnel au début)
+- [ ] **Créer les pages d'authentification** :
+  - [ ] Page `/signup` (inscription)
+  - [ ] Page `/login` (connexion)
+  - [ ] Middleware de protection des routes (redirection si non connectée)
+- [ ] **Tester le flux** : inscription → connexion → redirection vers dashboard
+
+## Phase 5 – Backend : API Routes & logique métier
+
+### 5.1 État du jour
+- [ ] Route `/api/daily-states` (GET, POST, PUT)
+- [ ] Route `/api/daily-states/history` (GET avec filtres par période)
+
+### 5.2 Traitement
+- [ ] Route `/api/treatment-sessions` (GET, POST, PUT, DELETE)
+- [ ] Route `/api/treatment-sessions/upcoming` (GET : prochains rendez-vous)
+
+### 5.3 Plan du jour
+- [ ] Route `/api/day-plans` (GET, POST)
+- [ ] Route `/api/day-plans/generate` (POST : génération automatique selon règles)
+- [ ] Route `/api/day-tasks` (GET, POST, PUT, DELETE)
+- [ ] **Logique de génération automatique** (fonction qui lit `daily_states` + `treatment_sessions` et crée des tâches)
+
+### 5.4 Journal
+- [ ] Route `/api/journal-entries` (GET, POST, PUT, DELETE)
+- [ ] Route `/api/journal-entries/highlights` (GET : moments de lumière)
+
+### 5.5 Documents
+- [ ] Route `/api/documents` (GET, POST, DELETE)
+- [ ] Route `/api/documents/upload` (POST : upload vers Supabase Storage)
+- [ ] Route `/api/documents/:id/summary` (GET, POST : résumé/vulgarisation)
+- [ ] Route `/api/document-treatment-links` (POST, DELETE : lier document à rendez-vous)
+
+### 5.6 Dashboard
+- [ ] Route `/api/dashboard` (GET : agrégation de toutes les données)
+
+## Phase 6 – Frontend : Pages principales
+
+### 6.1 Pages d'authentification
+- [ ] Page `/login` (formulaire + appel API)
+- [ ] Page `/signup` (formulaire + appel API)
+
+### 6.2 Page Dashboard
+- [ ] Page `/dashboard` :
+  - [ ] Affichage des cartes (état, traitement, plan, journal, bien-être, documents)
+  - [ ] Appel API `/api/dashboard`
+  - [ ] Liens vers les sous-pages
+
+### 6.3 Page État du jour
+- [ ] Page `/etat-du-jour` :
+  - [ ] Formulaire de saisie (énergie, fatigue, humeur)
+  - [ ] Graphiques d'évolution (bibliothèque : Recharts ou Chart.js)
+  - [ ] Appels API pour sauvegarder et récupérer l'historique
+
+### 6.4 Page Traitement
+- [ ] Page `/traitement` :
+  - [ ] Timeline des rendez-vous
+  - [ ] Formulaire d'ajout/modification de rendez-vous
+  - [ ] Section upload de documents (Supabase Storage)
+  - [ ] Appels API pour CRUD des rendez-vous et documents
+
+### 6.5 Page Plan du jour
+- [ ] Page `/plan-du-jour` :
+  - [ ] Affichage des tâches du jour
+  - [ ] Génération automatique du plan (bouton ou automatique)
+  - [ ] Modification/ajout/suppression de tâches
+  - [ ] Cases à cocher pour marquer comme fait
+
+### 6.6 Page Journal
+- [ ] Page `/journal` :
+  - [ ] Zone d'écriture (libre ou guidée)
+  - [ ] Liste des entrées précédentes
+  - [ ] Filtres et recherche
+  - [ ] Section "moments de lumière"
+
+### 6.7 Page Bien-être
+- [ ] Page `/bien-etre` :
+  - [ ] Bibliothèque d'exercices (statique dans le code pour commencer)
+  - [ ] Player audio/vidéo pour les exercices guidés (si applicable)
+  - [ ] Historique de pratique (si backend prêt)
+
+### 6.8 Page Documents
+- [ ] Page `/documents` :
+  - [ ] Liste des documents uploadés
+  - [ ] Zone d'upload (Supabase Storage)
+  - [ ] Affichage des résumés/vulgarisations
+  - [ ] Lien avec les rendez-vous
+
+## Phase 7 – Composants réutilisables
+
+- [ ] Composant `Card` (pour les cartes du dashboard)
+- [ ] Composant `Button` (boutons stylisés)
+- [ ] Composant `Input` / `Textarea` (formulaires)
+- [ ] Composant `Modal` (pour les formulaires en popup)
+- [ ] Composant `Timeline` (pour la page traitement)
+- [ ] Composant `Graph` (pour les graphiques)
+
+## Phase 8 – Intégration & tests
+
+- [ ] **Tester le flux complet** : inscription → connexion → utilisation de chaque page
+- [ ] **Tester les API routes** (avec Postman ou similaire)
+- [ ] **Gérer les erreurs** (messages d'erreur bienveillants)
+- [ ] **Gérer les cas limites** (pas de données, données vides, etc.)
+- [ ] **Tester sur mobile** (responsive)
+
+## Phase 9 – Améliorations & finitions
+
+- [ ] **Optimiser les performances** (chargement des données, cache si besoin)
+- [ ] **Améliorer l'UX** (animations douces, feedback utilisateur)
+- [ ] **Ajouter la vulgarisation des documents** (IA ou règles simples)
+- [ ] **Messages de soutien personnalisés** (dans le journal, basés sur le contenu)
+- [ ] **Polir le design** (couleurs, espacements, cohérence)
+
+## Phase 10 – Déploiement
+
+- [ ] **Déployer sur Vercel** (ou autre hébergeur Next.js)
+- [ ] **Configurer les variables d'environnement** en production
+- [ ] **Tester en production**

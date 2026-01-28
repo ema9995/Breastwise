@@ -1,0 +1,90 @@
+# Page "État du jour" – BreastWise
+
+## 1. Objectif de la page
+
+- Permettre à l'utilisatrice de **saisir son état du jour** (énergie, fatigue, humeur).
+- Visualiser l'**évolution dans le temps** de ces indicateurs (graphiques, tendances).
+- Comprendre les **patterns** (ex : "Tu as tendance à être plus fatiguée après les séances de chimiothérapie").
+- Créer un espace de **prise de conscience bienveillante** (sans jugement).
+
+## 2. Route
+
+- URL : `/etat-du-jour`
+- Accès : depuis le tableau de bord (`/dashboard`) via la carte "Mon état du jour".
+
+## 3. Contenu principal
+
+### 3.1 Section "Comment tu te sens aujourd'hui ?"
+
+Formulaire de saisie rapide (si pas encore rempli aujourd'hui) :
+
+- **Niveau d'énergie** (échelle de 1 à 5, utiliser émojis) :
+  - 1 😴 Très faible
+  - 2 😔 Faible
+  - 3 😐 Moyen
+  - 4 😊 Bon
+  - 5 🌟 Excellent
+
+- **Niveau de fatigue** (échelle de 1 à 5) :
+  - 1 😴 Très fatiguée
+  - 2 😔 Fatiguée
+  - 3 😐 Un peu fatiguée
+  - 4 😊 Peu fatiguée
+  - 5 🌟 Pas fatiguée
+
+- **Humeur / État émotionnel** (échelle de 1 à 5 ou émojis) :
+  - 1 😢 Très difficile
+  - 2 😔 Difficile
+  - 3 😐 Neutre
+  - 4 😊 Positif
+  - 5 🌟 Très positif
+
+- **Champ libre optionnel** : "Un mot sur ta journée ?" (texte court, max 200 caractères).
+
+- **Bouton** : "Enregistrer mon état" (ou "Mettre à jour" si déjà saisi aujourd'hui).
+
+### 3.2 Section "Ton évolution"
+
+Graphiques / visualisations simples :
+
+- **Graphique temporel** (7 derniers jours, 30 derniers jours, ou période personnalisée) :
+  - Courbes superposées : énergie (ligne verte/rose), fatigue (ligne orange/rouge), humeur (ligne bleue/violette).
+  - Points cliquables pour voir les notes du jour.
+
+- **Tendances** (messages bienveillants) :
+  - Exemple : "Tu as eu une semaine plus énergique que la précédente. 🌸"
+  - Exemple : "Ta fatigue semble liée à tes séances de traitement. C'est normal, on avance à ton rythme."
+
+### 3.3 Section "Insights & suggestions"
+
+- **Corrélations simples** (si données suffisantes) :
+  - "Tu as tendance à être plus fatiguée 2 jours après tes séances."
+  - "Tes meilleurs jours d'énergie correspondent souvent à tes jours de repos."
+
+- **Suggestions douces** :
+  - Si énergie faible : "Aujourd'hui, on peut prévoir des activités douces. Tu veux voir ton plan du jour ?"
+  - Si humeur difficile : "C'est normal de passer par des moments difficiles. Tu veux écrire dans ton journal ou faire un exercice de respiration ?"
+
+## 4. Actions disponibles sur la page
+
+- Saisir / mettre à jour son état du jour.
+- Changer la période d'affichage du graphique (7j, 30j, 3 mois, personnalisé).
+- Cliquer sur un point du graphique pour voir les détails du jour.
+- Exporter les données (option future, format CSV ou PDF).
+- Retour au tableau de bord (bouton ou lien).
+
+## 5. Navigation
+
+- **Depuis** : `/dashboard` (carte "Mon état du jour").
+- **Vers** :
+  - `/dashboard` (retour)
+  - `/plan-du-jour` (si suggestion d'adapter le plan)
+  - `/journal` (si suggestion d'écrire)
+  - `/bien-etre` (si suggestion d'exercice)
+
+## 6. Ton & style spécifiques
+
+- Toujours tutoyer (cohérent avec le reste).
+- Pas de jugement : "Tu as noté une fatigue élevée" (pas "Tu es trop fatiguée").
+- Mettre en avant les progrès : "Tu as réussi à noter ton état 5 jours de suite cette semaine. C'est déjà un pas important."
+- Rappeler que c'est normal d'avoir des hauts et des bas.

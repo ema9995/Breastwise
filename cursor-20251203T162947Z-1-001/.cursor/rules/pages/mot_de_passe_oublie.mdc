@@ -1,0 +1,60 @@
+# Page "Mot de passe oublié" – BreastWise
+
+## 1. Objectif de la page
+- Permettre à l'utilisatrice de demander un lien de réinitialisation en toute sécurité.
+- Rassurer : oublier son mot de passe est normal, le processus est simple et guidé.
+- Orienter vers la suite (e-mail envoyé) et vers le support en cas de difficulté.
+
+## 2. Route
+- URL : `/mot-de-passe-oublie`
+- Arrivée : depuis le lien « J'ai oublié mon mot de passe » sur `/login`.
+
+## 3. Contenu principal
+### 3.1 Titre & intro
+- Titre : « On va t'aider à te reconnecter. »
+- Texte doux : « Indique l'adresse e-mail de ton compte. Nous t'enverrons un lien pour choisir un nouveau mot de passe. »
+
+### 3.2 Formulaire
+- Champ **Adresse e-mail**
+  - Label : « Adresse e-mail »
+  - Placeholder : « vous@exemple.com »
+  - Aide : « Utilise l'adresse que tu as choisie à la création du compte. »
+- Bouton principal : **« Envoyer le lien »**
+- État de chargement : spinner court, texte « Envoi en cours… »
+- Lien retour : « Me connecter » → `/login`
+
+### 3.3 Messages & feedback
+- Succès (toujours formulé de façon neutre) :
+  - « Si un compte existe avec cette adresse, tu recevras un e-mail avec un lien pour réinitialiser ton mot de passe. Pense à vérifier tes spams. »
+- Erreurs de saisie :
+  - E-mail vide → « Merci de renseigner ton adresse e-mail. »
+  - Format invalide → « Ce format d'e-mail ne semble pas valide. »
+- Erreur système (500, réseau) :
+  - « Le service est temporairement indisponible. Réessaie dans quelques minutes. »
+
+### 3.4 État après soumission
+- Afficher un encart de confirmation (même message que le succès ci-dessus).
+- Bouton : « Renvoyer l'e-mail » (désactivé 30–60s pour limiter les abus).
+- Lien : « Retour à la connexion » → `/login`.
+
+## 4. Sécurité & règles produit
+- Ne jamais confirmer l'existence d'un compte (même message de succès pour toute adresse).
+- Limiter les tentatives (throttle côté serveur : ex. 5 req / 15 min / IP + e-mail).
+- Lien de réinitialisation à durée courte (ex. 30–60 minutes) et usage unique.
+- Le lien doit mener vers `/reinitialiser-mot-de-passe?token=...` (page à spécifier plus tard).
+- Nouveau mot de passe : longueur min 12, mélanger lettres/chiffres ; stockage uniquement haché.
+- Sur mobile : conserver la page simple, champs larges, CTA visible.
+
+## 5. Ton & style
+- Tutoyer, rassurer, zéro culpabilisation (« Pas de souci, on s'en occupe. »).
+- Messages courts, positifs, clairs.
+- Rappeler que l'utilisatrice peut réessayer ou demander de l'aide si besoin.
+
+## 6. Navigation
+- Depuis : `/login` (lien « J'ai oublié mon mot de passe »).
+- Vers : `/login` (retour), `/reinitialiser-mot-de-passe` (via lien e-mail).
+
+## 7. Éléments futurs / options
+- Support : lien discret « Besoin d'aide ? » → ouvre e-mail de support.
+- Afficher la dernière étape faite : « E-mail envoyé il y a X minutes » (anti-spam).
+- Variante accessibilité : rappeler que le lien est cliquable dans l'e-mail, prévoir texte alternatif si l'e-mail ne s'affiche pas correctement.

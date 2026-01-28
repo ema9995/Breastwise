@@ -1,0 +1,64 @@
+# Spécification fonctionnelle – Index BreastWise
+
+## 1. Présentation générale
+
+- Produit : BreastWise (site d'accompagnement des femmes dans le parcours du cancer du sein)
+- Objectifs :
+  - aider à organiser le quotidien,
+  - suivre le traitement
+  - offrir un soutien émotionnel continu et bienveillant.
+- Public cible : femmes en traitement 
+
+## 2. Liste des pages / modules
+
+> Le détail de chaque page se trouve dans un fichier dédié dans `.cursor/rules/pages/`.
+
+- **Accueil**
+  - Route : `/`
+  - Rôle : présenter BreastWise, expliquer la promesse, orienter vers l'inscription / connexion.
+  - Détail : `.cursor/rules/pages/accueil.mdc`
+
+- **Tableau de bord "Énergie, Émotion & Traitement"**
+  - Route : `/dashboard`
+  - Rôle : vue d'ensemble de l'état du jour et des étapes du traitement.
+  - Détail : `.cursor/rules/pages/dashboard.mdc`
+
+- **État du jour (historique détaillé)**
+  - Route : `/etat-du-jour`
+  - Rôle : voir l'évolution énergie / fatigue / humeur sur le temps.
+  - Détail : `.cursor/rules/pages/etat_du_jour.mdc`
+
+- **Suivi du traitement**
+  - Route : `/traitement`
+  - Rôle : timeline des rendez-vous et étapes médicales.
+  - Détail : `.cursor/rules/pages/traitement.mdc`
+
+- **Plan du jour avec IA**
+  - Route : `/plan-du-jour`
+  - Rôle : proposer un planning adapté à l'état du moment.
+  - Détail : `.cursor/rules/pages/plan_du_jour.mdc`
+
+- **Journal guidé & soutien moral**
+  - Route : `/journal`
+  - Rôle : permettre d'exprimer ses émotions avec des questions guidées.
+  - Détail : `.cursor/rules/pages/journal.mdc`
+
+- **Espace bien-être / exercices**
+  - Route : `/bien-etre`
+  - Rôle : bibliothèque d'exercices (respiration, visualisation, etc.).
+  - Détail : `.cursor/rules/pages/bien-etre.mdc`
+
+
+## 3. Règles UX / ton global
+
+- Langue : français.
+- Ton : chaleureux, rassurant, simple, jamais culpabilisant.
+- Mettre en avant les petites victoires et les efforts ("Vous avez pris soin de vous aujourd'hui.").
+- Éviter le jargon médical sans explication claire à côté.
+- Proposer toujours une action douce après une alerte (ex : exercice de respiration, pause, contacter un proche).
+
+## 4. Lien avec les autres docs
+
+- `.cursor/rules/modeles_donnees.mdc` : décrit les tables utilisées par toutes ces pages (Utilisateurs, Rendez-vous, Suivi énergie/émotion, Documents).
+- `docs/ia_fonctionnalites.md` : décrit comment l'IA intervient (plan du jour, vulgarisation, messages de soutien).
+- `docs/maquettes_fonctionnelles.md` : croquis / maquettes d'écrans si besoin.
