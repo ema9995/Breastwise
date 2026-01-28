@@ -1,0 +1,24 @@
+# Activités créatives – Breastwise
+
+## Rôle
+
+- Proposer des activités comme **tricot, crochet, DIY** pour occuper l’esprit.
+- Donner un sentiment de **création** et de contrôle.
+
+## Contenu
+
+- Tutoriels organisés par **niveau** : débutant, intermédiaire, avancé.
+- Chaque tutoriel : titre, niveau, durée, lien vidéo (souvent YouTube).
+- Description rassurante : "Faites à votre rythme, il n’y a pas de bonne ou mauvaise façon."
+
+## Expérience
+
+- Quand on choisit un niveau, on voit immédiatement les tutoriels associés.
+- Toujours afficher au moins 1 tutoriel par niveau (si possible).
+- Si aucun tuto n’est disponible, afficher un message clair au lieu de rien.
+
+## Technique
+
+- S’assurer que la sélection du niveau filtre bien les bons tutoriels.
+- Réutiliser la fonction d’ouverture de YouTube déjà définie pour la musique.
+- Ne pas dupliquer la logique déjà présente dans WellbeingScreen.

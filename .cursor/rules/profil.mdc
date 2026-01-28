@@ -1,0 +1,23 @@
+# Profil & Préférences – Breastwise
+
+## Rôle
+
+- Centraliser les **infos de base** de l’utilisatrice et ses préférences.
+- Gérer les paramètres de **notifications**, langue (si besoin), etc.
+
+## Contenu
+
+- Nom ou pseudo (facultatif).
+- Préférences : type de contenus préférés (musique, exercices, activités).
+- Option pour refaire l’**onboarding**.
+
+## Expérience
+
+- Rendre tout **facultatif**, jamais obligatoire.
+- Expliquer à quoi servent les infos recueillies.
+- Permettre de se déconnecter (si compte Supabase utilisé).
+
+## Technique
+
+- S’intégrer avec Supabase si un compte existe (authentification, profil).
+- Gérer correctement l’état connecté / non connecté dans la navigation.

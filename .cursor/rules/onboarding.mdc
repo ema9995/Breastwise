@@ -1,0 +1,60 @@
+# Onboarding / Connexion – Breastwise
+
+## Rôle de cet onboarding
+
+- Permettre à la personne de **créer un compte** ou de **se connecter**.
+- Donner accès à des fonctionnalités **personnalisées** :
+  - Ajouter / modifier du contenu,
+  - Sauvegarder ses préférences,
+  - Retrouver ses données sur plusieurs appareils (plus tard).
+
+## Contenu attendu
+
+- Première étape : choix clair entre :
+  - « Créer un compte »
+  - « Se connecter »
+  - (Option) « Continuer sans compte » si tu veux garder un mode invité.
+- Pour la création de compte :
+  - Email,
+  - Mot de passe,
+  - (Optionnel) Pseudo / prénom.
+- Pour la connexion :
+  - Email,
+  - Mot de passe,
+  - Lien « Mot de passe oublié ? » (même si ce n’est implémenté que plus tard).
+
+## Expérience utilisateur
+
+- Formulaires **très simples**, champs bien espacés, erreurs claires :
+  - Exemples de messages : « Email invalide », « Mot de passe trop court », etc.
+- Messages rassurants :
+  - « Vos informations sont utilisées uniquement pour votre compte Breastwise. »
+- Une fois connecté(e) ou inscrit(e) :
+  - Redirection vers l’**écran d’accueil** avec un message de bienvenue.
+
+## Ton & langage
+
+- Langue : **français**, ton **calme, rassurant**.
+- Expliquer clairement :
+  - Pourquoi il est utile de créer un compte (sauvegarde, personnalisation, etc.).
+- Ne jamais culpabiliser si la personne ne veut pas se connecter tout de suite.
+
+## Règles techniques
+
+- Utiliser **Supabase** pour :
+  - La création de compte (sign up),
+  - La connexion (sign in),
+  - L’état de session (utilisateur connecté ou non).
+- Stocker l’état de connexion pour :
+  - Afficher ou cacher certaines fonctionnalités (ajout / modification de contenu, notes, etc.).
+- L’onboarding de connexion ne doit pas se relancer à chaque ouverture si l’utilisateur est déjà connecté.
+- Laisser le **navigator principal** décider :
+  - Si on affiche l’onboarding de connexion,
+  - Ou si on va directement sur l’accueil / les écrans principaux.
+
+## Objectif
+
+- À la fin de cet onboarding, la personne doit :
+  - Soit être **connectée** à son compte,
+  - Soit avoir compris qu’elle peut continuer sans compte (si tu gardes ce mode),
+  - Savoir qu’elle pourra **ajouter / modifier / personnaliser** certaines choses grâce à son compte.

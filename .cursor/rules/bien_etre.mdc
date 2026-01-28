@@ -1,0 +1,24 @@
+# Écran Bien-être – Breastwise
+
+## Rôle
+
+- Proposer des **exercices de respiration**, relaxation, mouvements doux.
+- Offrir des contenus rapides pour **réduire le stress** et ramener au calme.
+
+## Contenu
+
+- Exercices structurés : titre, durée approximative, niveau (débutant / intermédiaire / avancé).
+- Instructions simples, étape par étape.
+- Possibilité d’avoir une **option audio** (lecture par voix, plus tard).
+
+## Expérience
+
+- L’utilisatrice doit pouvoir lancer un exercice en **1 tap**.
+- Montrer clairement la durée estimée (ex : "3 minutes").
+- Toujours rappeler qu’elle peut **arrêter à tout moment**, sans pression.
+
+## Technique
+
+- Respecter la structure actuelle des données (listes d’exercices, catégories).
+- Ne pas casser la logique existante des onglets / sections.
+- Éviter les animations lourdes qui pourraient faire lagger les téléphones modestes.

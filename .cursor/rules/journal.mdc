@@ -1,0 +1,24 @@
+
+# Journal / Notes – Breastwise
+
+## Rôle
+
+- Permettre d’écrire ses **émotions, ressentis, questions**.
+- Offrir un espace privé, sans jugement.
+
+## Contenu
+
+- Zone de texte libre.
+- Possibilité d’ajouter une date automatique.
+- Message explicatif : "Ce journal est pour vous, il n’est pas partagé."
+
+## Expérience
+
+- Sauvegarde automatique régulière pour éviter la perte de texte.
+- Afficher facilement les entrées passées (liste simple, par date).
+- Permettre de modifier ou supprimer ses propres notes.
+
+## Technique
+
+- Stockage local au minimum (puis plus tard, possibilité de cloud / Supabase).
+- Attention à ne pas perdre les données lors des mises à jour.

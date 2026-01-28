@@ -1,3 +1,58 @@
----
-alwaysApply: true
----
+# Écran d’accueil – Breastwise
+
+## Rôle de l’écran d’accueil
+
+- L’écran d’accueil sert de **porte d’entrée** principale à l’application Breastwise.
+- Il doit donner une **impression de calme, de sécurité et de soutien**.
+- Il oriente rapidement l’utilisatrice vers :
+  - Le **bien-être** (exercices, respiration, relaxation, musique douce),
+  - Les **activités créatives** (tricot, crochet, DIY, etc.),
+  - Le **suivi** (journal, notes, informations importantes),
+  - Les **ressources** (liens utiles, informations médicales validées, etc. – plus tard).
+
+## Contenu souhaité
+
+- **Message d’accueil** personnalisé si possible (par exemple : « Bonjour, ravie de vous retrouver »).
+- **Visuel rassurant** (couleurs douces, pas de rouge agressif, pas de visuels anxiogènes).
+- **Accès rapide** sous forme de boutons/cartes vers :
+  - Bien-être / Exercices,
+  - Musique douce (Lofi / Ghibli),
+  - Activités créatives,
+  - Onboarding ou profil (si l’utilisatrice n’a pas encore tout rempli).
+- Un petit **texte de soutien** (ex : « Prenez un moment pour vous aujourd’hui. Même 5 minutes comptent. »).
+
+## Expérience utilisateur
+
+- Tout doit être **facile à comprendre** en un coup d’œil.
+- Pas de texte trop long sur cet écran, plutôt des **mots-clés clairs**.
+- Les actions principales doivent être accessibles en **1 seul tap** depuis l’accueil.
+- L’écran doit être utilisable d’une main (boutons assez grands, bien espacés).
+
+## Règles de conception
+
+- Langue : **français**, ton **bienveillant**, jamais culpabilisant.
+- Éviter :
+  - Les termes trop médicaux ou anxiogènes sur l’accueil.
+  - Les messages type « vous devez » ; préférer « vous pouvez », « vous avez la possibilité ».
+- Favoriser :
+  - Les formulations positives, encourageantes.
+  - La sensation de **sécurité** et de **contrôle** pour l’utilisatrice.
+
+## Techniques / Dev
+
+- L’écran d’accueil doit :
+  - Respecter le thème visuel global de l’app (couleurs, police, style).
+  - S’intégrer avec la navigation existante (React Navigation – onglets / stack).
+  - Charger rapidement (éviter les appels réseau lourds au premier rendu).
+- Les boutons doivent utiliser la **navigation existante** vers :
+  - L’écran de bien-être (WellbeingScreen),
+  - Les playlists de musique,
+  - Les activités créatives,
+  - L’onboarding ou le profil selon l’état de l’utilisatrice.
+
+## Objectif
+
+- Quand une personne ouvre l’app, elle doit se sentir :
+  - **Accueillie**,
+  - **Comprise**,
+  - Et facilement guidée vers ce qui peut l’aider **ici et maintenant**.

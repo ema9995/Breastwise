@@ -1,0 +1,26 @@
+# Musique douce – Breastwise
+
+## Rôle
+
+- Offrir une **sélection de musiques calmes** (Lofi, Ghibli, etc.) pour se détendre.
+- Aider à créer une ambiance rassurante pendant les soins ou le repos.
+
+## Contenu
+
+- Playlists ou morceaux avec :
+  - Titre,
+  - Type (Lofi, Ghibli, Piano, etc.),
+  - Lien YouTube (ou autre plateforme plus tard).
+- Textes courts : "Musique douce pour se détendre quelques minutes."
+
+## Expérience
+
+- Lancement de la musique en **1 seul tap**.
+- Prévenir si la musique s’ouvre dans une autre app (YouTube).
+- Pas de lecture auto sans action volontaire.
+
+## Technique
+
+- Utiliser `Linking` pour ouvrir les liens YouTube.
+- Tester l’ouverture dans l’app YouTube si installée, sinon dans le navigateur.
+- Gérer proprement les erreurs (lien invalide, app non installée).
