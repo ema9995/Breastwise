@@ -1,7 +1,7 @@
-﻿import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = 'https://gqnhuofcrmgzjhuxenca.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdxbmh1b2Zjcm1nempodXhlbmNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3NzgzNjMsImV4cCI6MjA4MDM1NDM2M30.qgTzk6k-YcZ55u-P4sbKSJJDc2KWiNsabfwGyK-JDA8';
+const supabaseUrl = 'https://onjheswwngtgqwoeqlpl.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9uamhlc3d3bmd0Z3F3b2VxbHBsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MDEwNTEsImV4cCI6MjA5NjA3NzA1MX0.YbzpYIKvGECp2Thf8Uyafa2NyAL2wI-QT_LDHMz7uI0';
 
 if (!supabaseUrl || supabaseUrl === 'VOTRE_SUPABASE_URL') {
   console.warn('⚠️ Supabase URL non configurée. Veuillez mettre à jour src/services/supabase.js');
